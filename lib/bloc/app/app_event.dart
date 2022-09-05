@@ -22,3 +22,43 @@ class AppUserChanged extends AppEvent {
   @override
   List<Object> get props => [user];
 }
+
+class AppNavigationToProfile extends AppEvent {
+  @visibleForTesting
+  const AppNavigationToProfile(this.user);
+
+  final FitUser user;
+
+  @override
+  List<Object> get props => [user];
+}
+
+class AppNavigationToWeight extends AppEvent {
+  @visibleForTesting
+  const AppNavigationToWeight(this.user);
+
+  final FitUser user;
+
+  @override
+  List<Object> get props => [user];
+}
+
+class AppNavigationToStats extends AppEvent {
+  @visibleForTesting
+  const AppNavigationToStats(this.user);
+
+  final FitUser user;
+
+  @override
+  List<Object> get props => [user];
+}
+
+class AppNavigationToWorkout extends AppEvent {
+  @visibleForTesting
+  const AppNavigationToWorkout(this.user);
+
+  final FitUser user;
+
+  @override
+  List<Object> get props => [user];
+}

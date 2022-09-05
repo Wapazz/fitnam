@@ -47,10 +47,13 @@ class FitUser extends Equatable {
       name: map['name'],
       avatar: map['avatar'],
       program: FitProgram.fromMap(map['program']),
-      workouts: List<FitWorkout>.from(
-          map['workouts']?.map((x) => FitWorkout.fromMap(x))),
-      bodyDatas:
-          List<FitBody>.from(map['bodyDatas']?.map((x) => FitBody.fromMap(x))),
+      workouts: map['workouts'] != null
+          ? List<FitWorkout>.from(
+              map['workouts']?.map((x) => FitWorkout.fromMap(x)))
+          : [],
+      bodyDatas: map['bodyDatas'] != null
+          ? List<FitBody>.from(map['bodyDatas']?.map((x) => FitBody.fromMap(x)))
+          : [],
     );
   }
 

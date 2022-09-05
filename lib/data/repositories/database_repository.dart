@@ -12,7 +12,8 @@ class DatabaseRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> completeOnboarding(OnboardingData data, FitUser user) async {
-    // await _db.collection("users").doc(user.uid).set(data.toMap());
+    print("${user.uid}");
+    await _db.collection("users").doc(user.uid).set(data.toMap());
   }
 
   Stream<FitUser> streamUser(FitUser user) =>
