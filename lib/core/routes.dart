@@ -29,22 +29,22 @@ List<Page<dynamic>> onGenerateAppViewPages(
   }
 }
 
-List<Page<dynamic>> onGenerateNavigationPages(
-  AppNavigation state,
-  List<Page<dynamic>> pages,
-) {
-  switch (state) {
-    case AppNavigation.home:
-      return [HomePage.page()];
-    case AppNavigation.stats:
-      return [HomePage.page(), StatsPage.page()];
-    case AppNavigation.settings:
-      return [HomePage.page(), ProfilePage.page()];
-    case AppNavigation.weighting:
-      return [HomePage.page(), WeightingPage.page()];
-    case AppNavigation.session:
-      return [HomePage.page(), SessionPage.page()];
-    default:
-      return [LandingPage.page()];
-  }
-}
+// List<Page<dynamic>> onGenerateNavigationPages(
+//   AppNavigation state,
+//   List<Page<dynamic>> pages,
+// ) {
+//   switch (state) {
+//     case AppNavigation.home:
+//       return [...pages, HomePage.page()];
+//     case AppNavigation.stats:
+//       return [...pages, HomePage.page(), StatsPage.page()];
+//     case AppNavigation.settings:
+//       return [...pages, HomePage.page(), ProfilePage.page()];
+//     case AppNavigation.weighting:
+//       return [...pages, HomePage.page(), WeightingPage.page()];
+//     case AppNavigation.session:
+//       return [...pages, HomePage.page(), SessionPage.page()];
+//     default:
+//       return [...pages, LandingPage.page()];
+//   }
+// }

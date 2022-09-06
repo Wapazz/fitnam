@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class GoogleLoginButton extends StatelessWidget {
-  const GoogleLoginButton({Key? key}) : super(key: key);
+class AppleLoginButton extends StatelessWidget {
+  const AppleLoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,10 @@ class GoogleLoginButton extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: const [
-                Icon(FontAwesomeIcons.google, color: Colors.black),
+                Icon(FontAwesomeIcons.apple, color: Colors.black),
                 SizedBox(width: 20),
                 Text(
-                  "Se connecter avec Google",
+                  "Se connecter avec Apple  ",
                   style: TextStyle(color: Colors.black),
                 ),
               ],

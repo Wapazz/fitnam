@@ -1,22 +1,30 @@
 import 'package:fitnam/bloc/app/app_bloc.dart';
-import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+import 'widgets/fit_fab.dart';
 
-  static Page page() => const MaterialPage(child: HomePage());
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key, required this.user}) : super(key: key);
+  final FitUser user;
+
+  // static Page page() => const MaterialPage(child: HomePage(user: user,));
 
   @override
   Widget build(BuildContext context) {
-    FitUser user =
-        (context.read<CurrentUserCubit>().state as CurrentUserAvailable)
-            .fitUser;
-
+    int todaysIndex = DateTime.now().weekday;
+    // bool hasWeighting = user.program.weighting.isNotEmpty &&
+    //     user.program.weighting[todaysIndex];
+    // bool hasWorkout = user.program.abs.isNotEmpty &&
+    //         user.program.abs[todaysIndex] ||
+    //     user.program.cardio.isNotEmpty && user.program.cardio[todaysIndex] ||
+    //     user.program.upperBody.isNotEmpty &&
+    //         user.program.upperBody[todaysIndex] ||
+    //     user.program.lowerBody.isNotEmpty &&
+    //         user.program.lowerBody[todaysIndex] ||
+    //     user.program.back.isNotEmpty && user.program.back[todaysIndex];
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -27,58 +35,18 @@ class HomePage extends StatelessWidget {
               icon: Icon(FontAwesomeIcons.rightToBracket))
         ],
       ),
-      floatingActionButton: SpeedDial(
-        icon: FontAwesomeIcons.a,
-        activeIcon: FontAwesomeIcons.accessibleIcon,
-        overlayColor: Colors.black,
-        overlayOpacity: 0.7,
+      floatingActionButton: FitFab(),
+      body: SingleChildScrollView(
+          child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          SpeedDialChild(
-            child: const Icon(FontAwesomeIcons.handFist),
-            backgroundColor: Colors.red,
-            labelBackgroundColor: Colors.transparent,
-            labelShadow: [],
-            foregroundColor: Colors.white,
-            label: 'Seance',
-            onTap: () =>
-                context.read<CurrentUserCubit>().onNavigateToSession(user),
-            onLongPress: () => debugPrint('FIRST CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: const Icon(FontAwesomeIcons.weightScale),
-            backgroundColor: Colors.black,
-            labelStyle: const TextStyle(color: Colors.white),
-            foregroundColor: Colors.white,
-            labelBackgroundColor: Colors.black,
-            label: 'Pesee',
-            onTap: () =>
-                context.read<CurrentUserCubit>().onNavigateToWeighting(user),
-            onLongPress: () => debugPrint('SECOND CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: const Icon(FontAwesomeIcons.chartSimple),
-            backgroundColor: Colors.green,
-            labelShadow: [],
-            labelStyle: TextStyle(color: Colors.white),
-            labelBackgroundColor: Colors.transparent,
-            foregroundColor: Colors.white,
-            label: 'Stats',
-            onTap: () =>
-                context.read<CurrentUserCubit>().onNavigateToStats(user),
-            onLongPress: () => debugPrint('SECOND CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: const Icon(FontAwesomeIcons.gear),
-            backgroundColor: Colors.yellow,
-            foregroundColor: Colors.white,
-            label: 'Settings',
-            onTap: () =>
-                context.read<CurrentUserCubit>().onNavigateToProfile(user),
-            onLongPress: () => debugPrint('SECOND CHILD LONG PRESS'),
-          ),
+          Text("Hello, ${user.name}"),
+          Text("Todays motto"),
+          Text("${user.program}")
+          // if (hasWorkout) WorkoutCard(),
+          // if (hasWeighting) WeightingCard(),
         ],
-      ),
-      body: Container(),
+      )),
     );
   }
 }

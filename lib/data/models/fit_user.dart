@@ -1,43 +1,54 @@
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/core/constants.dart';
 
-import 'fit_body.dart';
-import 'fit_program.dart';
-import 'fit_workout.dart';
+import 'workout_topic.dart';
 
 class FitUser extends Equatable {
   final String uid;
   final String name;
   final String avatar;
-  final FitProgram program;
-  final List<FitWorkout> workouts;
-  final List<FitBody> bodyDatas;
+  final List<WorkoutTopic> program;
+  final DateTime? lastWeighting;
+  final DateTime? lastWorkout;
+  final bool europeanMetrics;
 
-  const FitUser(
-      {required this.uid,
-      required this.name,
-      this.avatar = "",
-      this.program = FitProgram.empty,
-      this.workouts = const [],
-      this.bodyDatas = const []});
+  const FitUser({
+    required this.uid,
+    required this.name,
+    required this.avatar,
+    this.program = programData,
+    this.lastWeighting,
+    this.lastWorkout,
+    this.europeanMetrics = true,
+  });
 
-  static const empty = FitUser(uid: "", name: "");
-  bool get isEmpty => this == FitUser.empty;
+  static const empty = FitUser(uid: "", name: "", avatar: "");
+  bool get isEmpty => this == empty;
   bool get isNotEmpty => !isEmpty;
 
   @override
-  List<Object?> get props =>
-      [uid, name, avatar, program, ...workouts, ...bodyDatas];
+  List<Object?> get props => [
+        uid,
+        name,
+        avatar,
+        program,
+        lastWeighting,
+        lastWorkout,
+        europeanMetrics,
+      ];
 
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
       'name': name,
       'avatar': avatar,
-      'program': program.toMap(),
-      'workouts': workouts.map((x) => x.toMap()).toList(),
-      'bodyDatas': bodyDatas.map((x) => x.toMap()).toList(),
+      'program': program.isNotEmpty
+          ? program.map((x) => x.toMap()).toList()
+          : programData,
+      'lastWeighting': lastWeighting?.millisecondsSinceEpoch,
+      'lastWorkout': lastWorkout?.millisecondsSinceEpoch,
+      'europeanMetrics': europeanMetrics,
     };
   }
 
@@ -46,14 +57,17 @@ class FitUser extends Equatable {
       uid: map['uid'],
       name: map['name'],
       avatar: map['avatar'],
-      program: FitProgram.fromMap(map['program']),
-      workouts: map['workouts'] != null
-          ? List<FitWorkout>.from(
-              map['workouts']?.map((x) => FitWorkout.fromMap(x)))
-          : [],
-      bodyDatas: map['bodyDatas'] != null
-          ? List<FitBody>.from(map['bodyDatas']?.map((x) => FitBody.fromMap(x)))
-          : [],
+      program: map['program'] != null
+          ? List<WorkoutTopic>.from(
+              map['program']?.map((x) => WorkoutTopic.fromMap(x)))
+          : programData,
+      lastWeighting: map['lastWeighting'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['lastWeighting'])
+          : null,
+      lastWorkout: map['lastWorkout'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['lastWorkout'])
+          : null,
+      europeanMetrics: map['europeanMetrics'],
     );
   }
 
@@ -61,4 +75,24 @@ class FitUser extends Equatable {
 
   factory FitUser.fromJson(String source) =>
       FitUser.fromMap(json.decode(source));
+
+  FitUser copyWith({
+    String? uid,
+    String? name,
+    String? avatar,
+    List<WorkoutTopic>? program,
+    DateTime? lastWeighting,
+    DateTime? lastWorkout,
+    bool? europeanMetrics,
+  }) {
+    return FitUser(
+      uid: uid ?? this.uid,
+      name: name ?? this.name,
+      avatar: avatar ?? this.avatar,
+      program: program ?? this.program,
+      lastWeighting: lastWeighting ?? this.lastWeighting,
+      lastWorkout: lastWorkout ?? this.lastWorkout,
+      europeanMetrics: europeanMetrics ?? this.europeanMetrics,
+    );
+  }
 }

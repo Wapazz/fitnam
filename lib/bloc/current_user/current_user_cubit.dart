@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fitnam/data/models/fit_user.dart';
-import 'package:fitnam/data/models/onboarding_data.dart';
+import 'package:fitnam/data/models/profile_form_data.dart';
 import 'package:fitnam/data/repositories/database_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,31 +8,37 @@ part 'current_user_state.dart';
 
 class CurrentUserCubit extends Cubit<CurrentUserState> {
   CurrentUserCubit({required this.databaseRepository})
-      : super(CurrentUserInitial());
+      : super(const CurrentUserInitial(FitUser.empty));
 
   final DatabaseRepository databaseRepository;
 
   void getStreamUser(FitUser user) {
-    // TODO LOOK IF THE EXCEPTION FIREBASE COMES FROM HERE NEED TO UNSUBSCriBE thE STREAM
     databaseRepository.streamUser(user).listen((users) {
       if (users.avatar.isEmpty) {
-        emit(CurrentUserOnboarding(fitUser: users));
+        emit(CurrentUserOnboarding(users));
       } else {
-        emit(CurrentUserAvailable(fitUser: users));
+        emit(CurrentUserAvailable(users));
       }
     });
   }
 
-  Future<void> completeOnboarding(OnboardingData data, FitUser user) async {
-    await databaseRepository.completeOnboarding(data, user);
+  Future<void> completeOnboarding() async {
+    await databaseRepository.completeOnboarding(state.user);
   }
 
-  void onNavigateToProfile(FitUser user) => emit(
-      CurrentUserAvailable(fitUser: user, navigation: AppNavigation.settings));
-  void onNavigateToSession(FitUser user) => emit(
-      CurrentUserAvailable(fitUser: user, navigation: AppNavigation.session));
-  void onNavigateToStats(FitUser user) => emit(
-      CurrentUserAvailable(fitUser: user, navigation: AppNavigation.stats));
-  void onNavigateToWeighting(FitUser user) => emit(
-      CurrentUserAvailable(fitUser: user, navigation: AppNavigation.weighting));
+  void onNavigateToProfile() => emit(
+      CurrentUserAvailable(state.user, navigation: AppNavigation.settings));
+  void onNavigateToSession() =>
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.session));
+  void onNavigateToStats() =>
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.stats));
+  void onNavigateToWeighting() => emit(
+      CurrentUserAvailable(state.user, navigation: AppNavigation.weighting));
+  void onNavigateBack() =>
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+
+  Future<void> saveProfile(ProfileFormData data) async {
+    await databaseRepository.saveProfile(state.user, data);
+    emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+  }
 }
