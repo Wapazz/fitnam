@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
-import 'package:fitnam/core/constants.dart';
+import 'package:fitnam/data/models/fit_weighting.dart';
+import 'package:fitnam/data/start/workout_data.dart';
 
 import 'workout_topic.dart';
 
@@ -9,7 +10,7 @@ class FitUser extends Equatable {
   final String name;
   final String avatar;
   final List<WorkoutTopic> program;
-  final DateTime? lastWeighting;
+  final FitWeighting? lastWeighting;
   final DateTime? lastWorkout;
   final bool europeanMetrics;
 
@@ -26,6 +27,8 @@ class FitUser extends Equatable {
   static const empty = FitUser(uid: "", name: "", avatar: "");
   bool get isEmpty => this == empty;
   bool get isNotEmpty => !isEmpty;
+
+  String get firstName => name.split(' ').first;
 
   @override
   List<Object?> get props => [
@@ -46,7 +49,7 @@ class FitUser extends Equatable {
       'program': program.isNotEmpty
           ? program.map((x) => x.toMap()).toList()
           : programData,
-      'lastWeighting': lastWeighting?.millisecondsSinceEpoch,
+      'lastWeighting': lastWeighting?.toMap(),
       'lastWorkout': lastWorkout?.millisecondsSinceEpoch,
       'europeanMetrics': europeanMetrics,
     };
@@ -62,7 +65,7 @@ class FitUser extends Equatable {
               map['program']?.map((x) => WorkoutTopic.fromMap(x)))
           : programData,
       lastWeighting: map['lastWeighting'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['lastWeighting'])
+          ? FitWeighting.fromMap(map['lastWeighting'])
           : null,
       lastWorkout: map['lastWorkout'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['lastWorkout'])
@@ -81,7 +84,7 @@ class FitUser extends Equatable {
     String? name,
     String? avatar,
     List<WorkoutTopic>? program,
-    DateTime? lastWeighting,
+    FitWeighting? lastWeighting,
     DateTime? lastWorkout,
     bool? europeanMetrics,
   }) {

@@ -1,4 +1,5 @@
 import 'package:fitnam/bloc/app/app_bloc.dart';
+import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,9 @@ class StatsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(FontAwesomeIcons.chevronLeft),
+            onPressed: () => context.read<CurrentUserCubit>().onNavigateBack()),
         title: Text("Stats"),
         actions: [
           IconButton(

@@ -12,15 +12,15 @@ class FitFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
-      icon: FontAwesomeIcons.a,
-      activeIcon: FontAwesomeIcons.accessibleIcon,
+      icon: FontAwesomeIcons.plus,
+      activeIcon: FontAwesomeIcons.xmark,
       overlayColor: Colors.black,
-      overlayOpacity: 0.7,
+      overlayOpacity: 0.8,
       children: [
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.handFist),
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.yellow,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.black,
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,
@@ -29,8 +29,8 @@ class FitFab extends StatelessWidget {
         ),
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.weightScale),
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.yellow,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.black,
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,
@@ -39,8 +39,8 @@ class FitFab extends StatelessWidget {
         ),
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.chartSimple),
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.yellow,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.black,
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,
@@ -49,8 +49,8 @@ class FitFab extends StatelessWidget {
         ),
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.gear),
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.yellow,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.black,
           label: 'Settings',
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
@@ -59,8 +59,8 @@ class FitFab extends StatelessWidget {
         ),
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.leaf),
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.yellow,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.black,
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,

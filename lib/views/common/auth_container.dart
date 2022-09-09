@@ -20,6 +20,7 @@ class AuthContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final baseUser = context.select((AppBloc bloc) => bloc.state.user);
     context.read<CurrentUserCubit>().getStreamUser(baseUser);
+
     return BlocConsumer<CurrentUserCubit, CurrentUserState>(
         listener: (context, state) {
       if (state is CurrentUserAvailable) {

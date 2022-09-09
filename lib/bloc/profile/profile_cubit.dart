@@ -18,8 +18,4 @@ class ProfileCubit extends Cubit<ProfileState> {
     prg[prg.indexOf(topic)] = newTopic;
     emit(ProfileModified(state.profile.copyWith(program: prg)));
   }
-
-  savingProfile() {
-    emit(ProfileSaving(state.profile));
-  }
 }

@@ -1,6 +1,10 @@
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/data/models/profile_form_data.dart';
+import 'package:uuid/uuid.dart';
+
+const Uuid uidGen = Uuid();
 
 class DatabaseRepository {
   static final DatabaseRepository _singleton = DatabaseRepository._internal();
@@ -13,7 +17,7 @@ class DatabaseRepository {
 
   Future<void> completeOnboarding(FitUser user) async {
     FitUser toCreate = user.copyWith(avatar: "default.png");
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 1200));
     await _db.collection("users").doc(user.uid).set(toCreate.toMap());
   }
 
@@ -35,5 +39,24 @@ class DatabaseRepository {
         .collection("users")
         .doc(user.uid)
         .set(upload.toMap(), SetOptions(merge: true));
+  }
+
+  Future<void> saveWeightData(FitUser user, FitWeighting data) async {
+    // String currentDocUid =
+    //     "${user.uid}-${DateTime.now().month}-${DateTime.now().year}";
+    FitWeighting upload = data.copyWith(date: DateTime.now());
+    try {
+      String uid = uidGen.v4();
+      await _db.collection("weighting").doc(uid).set({
+        'uid': uid,
+        'userId': user.uid,
+        ...upload.toMap(),
+      });
+      await _db.collection("users").doc(user.uid).set({
+        'lastWeighting': upload.toMap(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print(e);
+    }
   }
 }

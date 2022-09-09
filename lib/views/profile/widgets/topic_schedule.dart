@@ -1,6 +1,7 @@
 import 'package:fitnam/bloc/profile/profile_cubit.dart';
 import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
+import 'package:fitnam/data/start/workout_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,12 +24,12 @@ class TopicSchedule extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(topic.name,
+              Text(workoutNameFromId(topic.name),
                   style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
-              Text(topic.description,
+              Text(workoutDescFromId(topic.name),
                   style: const TextStyle(fontSize: 10, color: Colors.grey)),
               const SizedBox(height: 10),
               ScheduleWidget(topic: topic),
@@ -56,7 +57,9 @@ class ScheduleWidget extends StatelessWidget {
           child: Container(
             height: 30,
             width: 30,
-            color: topic.schedule[i] ? Colors.yellow : Colors.grey,
+            color: topic.schedule[i]
+                ? Theme.of(context).primaryColor
+                : Colors.grey,
             child: Center(child: Text(weekdays[i])),
           ),
         ),

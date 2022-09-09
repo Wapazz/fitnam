@@ -26,11 +26,11 @@ class OnboardingPage extends StatelessWidget {
                   ),
                   Container(
                     alignment: const Alignment(0, 0.2),
-                    child: const Text(
+                    child: Text(
                       "Creer ton programme",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.yellow,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 23,
                           fontWeight: FontWeight.bold),
                     ),
@@ -62,11 +62,12 @@ class OnboardingPage extends StatelessWidget {
                                         .read<CurrentUserCubit>()
                                         .completeOnboarding();
                                   },
-                                  innerColor: Colors.yellow,
+                                  innerColor: Theme.of(context).primaryColor,
                                   outerColor: Colors.grey[800],
                                   text: "  Demarrer maintenant",
                                   textStyle: TextStyle(
-                                      fontSize: 14, color: Colors.yellow),
+                                      fontSize: 14,
+                                      color: Theme.of(context).primaryColor),
                                 ),
                               );
                             },
@@ -106,7 +107,7 @@ class OnboardingPage extends StatelessWidget {
     //                           .read<CurrentUserCubit>()
     //                           .completeOnboarding(state.data, user);
     //                     },
-    //                     innerColor: Colors.yellow,
+    //                     innerColor: Theme.of(context).primaryColor,
     //                     outerColor: Colors.black,
     //                     text: "Demarrer maintenant",
     //                   ),

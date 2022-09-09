@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fitnam/data/models/fit_user.dart';
+import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/data/models/profile_form_data.dart';
 import 'package:fitnam/data/repositories/database_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,16 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
 
   Future<void> saveProfile(ProfileFormData data) async {
-    await databaseRepository.saveProfile(state.user, data);
-    emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+    await Future.delayed(const Duration(milliseconds: 1200), () async {
+      await databaseRepository.saveProfile(state.user, data);
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+    });
+  }
+
+  Future<void> saveWeightData(FitWeighting data) async {
+    await Future.delayed(const Duration(milliseconds: 1200), () async {
+      await databaseRepository.saveWeightData(state.user, data);
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+    });
   }
 }

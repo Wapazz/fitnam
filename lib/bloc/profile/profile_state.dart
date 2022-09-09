@@ -15,7 +15,3 @@ class ProfileInitial extends ProfileState {
 class ProfileModified extends ProfileState {
   const ProfileModified(super.profile);
 }
-
-class ProfileSaving extends ProfileState {
-  const ProfileSaving(super.profile);
-}

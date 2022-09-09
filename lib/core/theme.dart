@@ -2,24 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final appTheme = ThemeData(
-  textTheme: GoogleFonts.poppinsTextTheme(),
-  brightness: Brightness.light,
-  primaryColorDark: const Color.fromARGB(255, 204, 161, 51),
+  textTheme: GoogleFonts.poppinsTextTheme()
+      .copyWith(bodySmall: TextStyle(color: Colors.white)),
+  brightness: Brightness.dark,
+  primaryColorDark: const Color(0xFFFEE666),
   primaryColorLight: const Color.fromARGB(255, 237, 209, 139),
-  primaryColor: const Color(0xFFE4BF60),
+  primaryColor: const Color(0xFFFEE666),
   colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFFE4BF60), secondary: const Color(0xFFE4BF60)),
-  scaffoldBackgroundColor: const Color(0xFFF3F7F9),
+      seedColor: const Color(0xFFFEE666),
+      secondary: const Color(0xFFFEE666),
+      brightness: Brightness.dark),
+  scaffoldBackgroundColor: Color(0xFF141313),
   inputDecorationTheme: InputDecorationTheme(
     floatingLabelStyle:
         MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
       final Color color = states.contains(MaterialState.error)
           ? Colors.red
-          : const Color.fromARGB(255, 204, 161, 51);
+          : const Color(0xFFFEE666);
       return TextStyle(color: color, letterSpacing: 1.3);
     }),
     focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: Color.fromARGB(255, 204, 161, 51)),
+      borderSide: BorderSide(color: Color(0xFFFEE666)),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(6),

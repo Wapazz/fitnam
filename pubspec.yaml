@@ -51,6 +51,7 @@ dependencies:
   flutter_speed_dial: ^6.0.0
   slide_to_act: ^2.0.1
   flutter_svg: ^1.1.4
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +77,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/avatar/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
