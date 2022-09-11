@@ -4,8 +4,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TitleWithWeight extends StatelessWidget {
-  const TitleWithWeight({Key? key, required this.weight}) : super(key: key);
+  const TitleWithWeight({Key? key, required this.weight, required this.isKilos})
+      : super(key: key);
   final double weight;
+  final bool isKilos;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class TitleWithWeight extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 16)),
           const Spacer(),
-          Text("${weight.toStringAsFixed(1)} kg",
+          Text("${weight.toStringAsFixed(1)} ${isKilos ? 'kg' : 'lbs'}",
               style: TextStyle(
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,

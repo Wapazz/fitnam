@@ -1,5 +1,4 @@
 import 'package:fitnam/bloc/profile/profile_cubit.dart';
-import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
 import 'package:fitnam/data/start/workout_data.dart';
 import 'package:flutter/material.dart';

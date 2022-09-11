@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/data/models/fit_user.dart';
 
 class WeightsList extends Equatable {
   final List<FitWeighting> data;
@@ -30,34 +31,40 @@ class WeightsList extends Equatable {
 }
 
 class FitWeighting extends Equatable {
-  final double weight;
+  final double kilos;
+  final double pounds;
   final double muscularMass;
   final double fatMass;
   final DateTime date;
 
   const FitWeighting({
-    required this.weight,
+    required this.kilos,
+    required this.pounds,
     required this.muscularMass,
     required this.fatMass,
     required this.date,
   });
 
-  @override
-  List<Object?> get props => [weight, muscularMass, fatMass];
+  double weight(FitUser user) => user.europeanMetrics ? kilos : pounds;
 
-  static final empty =
-      FitWeighting(weight: 0, muscularMass: 0, fatMass: 0, date: DateTime(0));
+  @override
+  List<Object?> get props => [kilos, pounds, muscularMass, fatMass];
+
+  static final empty = FitWeighting(
+      pounds: 0, kilos: 0, muscularMass: 0, fatMass: 0, date: DateTime(0));
   bool get isEmpty => this == empty;
   bool get isNotEmpty => !isEmpty;
 
   FitWeighting copyWith({
-    double? weight,
+    double? kilos,
+    double? pounds,
     double? muscularMass,
     double? fatMass,
     DateTime? date,
   }) {
     return FitWeighting(
-      weight: weight ?? this.weight,
+      kilos: kilos ?? this.kilos,
+      pounds: pounds ?? this.pounds,
       muscularMass: muscularMass ?? this.muscularMass,
       fatMass: fatMass ?? this.fatMass,
       date: date ?? this.date,
@@ -66,7 +73,8 @@ class FitWeighting extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'weight': weight,
+      'kilos': kilos,
+      'pounds': pounds,
       'muscularMass': muscularMass,
       'fatMass': fatMass,
       'date': FieldValue.serverTimestamp()
@@ -75,7 +83,8 @@ class FitWeighting extends Equatable {
 
   factory FitWeighting.fromMap(Map<String, dynamic> map) {
     return FitWeighting(
-        weight: map['weight'],
+        kilos: map['kilos'],
+        pounds: map['pounds'],
         muscularMass: map['muscularMass'],
         fatMass: map['fatMass'],
         date: map['date'] == null

@@ -1,13 +1,13 @@
 import 'package:fitnam/bloc/weighting/weighting_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vertical_weight_slider/vertical_weight_slider.dart';
 
 class WeightSlider extends StatefulWidget {
-  const WeightSlider({Key? key, required this.weight}) : super(key: key);
+  const WeightSlider({Key? key, required this.weight, required this.isKilos})
+      : super(key: key);
   final double weight;
+  final bool isKilos;
 
   @override
   State<WeightSlider> createState() => _WeightSliderState();
@@ -46,7 +46,7 @@ class _WeightSliderState extends State<WeightSlider> {
             gap: 30.0,
           ),
           onChanged: (double value) {
-            context.read<WeightingCubit>().updateWeight(value);
+            context.read<WeightingCubit>().updateWeight(value, widget.isKilos);
           },
           indicator: Container(
             height: 3.0,

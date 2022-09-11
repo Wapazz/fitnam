@@ -5,18 +5,12 @@ import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/views/common/widget/animated_cta.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
-import 'package:fitnam/views/weighting/widgets/info_button.dart';
 import 'package:fitnam/views/weighting/widgets/mass_slider.dart';
 import 'package:fitnam/views/weighting/widgets/title_with_info_button.dart';
 import 'package:fitnam/views/weighting/widgets/title_with_weight.dart';
 import 'package:fitnam/views/weighting/widgets/weight_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'package:stepper_counter_swipe/stepper_counter_swipe.dart';
-import 'package:vertical_weight_slider/vertical_weight_slider.dart';
 
 class WeightingPage extends StatelessWidget {
   const WeightingPage({Key? key, required this.user}) : super(key: key);
@@ -27,7 +21,8 @@ class WeightingPage extends StatelessWidget {
           create: (context) => WeightingCubit(user.lastWeighting ??
               FitWeighting(
                   date: DateTime.now(),
-                  weight: 50,
+                  kilos: 70,
+                  pounds: 165,
                   muscularMass: 70,
                   fatMass: 30)),
           child: WeightingPage(user: user),
@@ -49,17 +44,22 @@ class WeightingPage extends StatelessWidget {
                     children: [
                       FitHeader(
                         avatar: user.avatar,
-                        title: "Hello, ${user.firstName}",
+                        title: "Hello, ${user.firstName} !",
                         message:
                             "C'est le moment de noter les résultats de tous tes courageux efforts.",
                         hasClosedBottom: true,
                       ),
                       const SizedBox(height: 30),
-                      TitleWithWeight(weight: state.weightData.weight),
+                      TitleWithWeight(
+                          weight: state.weightData.weight(user),
+                          isKilos: user.europeanMetrics),
                       SizedBox(
                         height: 100,
                         width: MediaQuery.of(context).size.width,
-                        child: WeightSlider(weight: state.weightData.weight),
+                        child: WeightSlider(
+                          weight: state.weightData.weight(user),
+                          isKilos: user.europeanMetrics,
+                        ),
                       ),
                       const SizedBox(height: 20),
                       const TitleWithInfobutton(title: "Masse Graisseuse"),

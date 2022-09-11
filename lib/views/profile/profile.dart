@@ -4,6 +4,7 @@ import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/data/models/profile_form_data.dart';
 import 'package:fitnam/views/common/widget/animated_cta.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
+import 'package:fitnam/views/profile/widgets/metrics_switch.dart';
 import 'package:fitnam/views/profile/widgets/topic_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class ProfilePage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FitHeader(
                           avatar: user.avatar,
@@ -38,10 +40,33 @@ class ProfilePage extends StatelessWidget {
                           message:
                               "Construis ici ton programme de musculation jour par jour.",
                           hasClosedBottom: true),
-                      // WeightSettings(),
-                      const Text("Mon programme"),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                          children: [
+                            const Text("Unité de poids",
+                                style: TextStyle(color: Colors.grey)),
+                            const Spacer(),
+                            MetricsSwitch(
+                                onTap: (value) => context
+                                    .read<ProfileCubit>()
+                                    .updateMetricSettings(value),
+                                state: state.profile.usesEuropeanMetrics),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text("Mon programme",
+                            style: TextStyle(color: Colors.grey)),
+                      ),
                       ...state.profile.program
-                          .map((e) => TopicSchedule(topic: e))
+                          .map((e) => Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: TopicSchedule(topic: e),
+                              ))
                           .toList(),
                       const SizedBox(height: 90),
                     ],

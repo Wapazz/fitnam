@@ -33,10 +33,10 @@ class FitHeader extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Flexible(
+                  Expanded(
                     child: Text(
                       title,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.fade,
                       maxLines: 1,
                       style: GoogleFonts.arsenal(
                           color: Colors.white,
@@ -44,13 +44,6 @@ class FitHeader extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  // if (hasClosedBottom)
-                  //   Expanded(
-                  //     child: Container(
-                  //       // child: const Spacer(),
-                  //       color: Colors.pink,
-                  //     ),
-                  //   ),
                   if (hasClosedBottom)
                     IconButton(
                         onPressed: () =>

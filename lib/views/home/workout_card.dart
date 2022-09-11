@@ -36,7 +36,7 @@ class WorkoutCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: InkWell(
         onTap: () {
-          context.read<CurrentUserCubit>().onNavigateToWeighting();
+          context.read<CurrentUserCubit>().onNavigateToSession();
         },
         child: Container(
           decoration: BoxDecoration(

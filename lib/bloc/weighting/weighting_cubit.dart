@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,8 +27,14 @@ class WeightingCubit extends Cubit<WeightingState> {
     emit(WeightingModified(state.weightData.copyWith(muscularMass: value)));
   }
 
-  updateWeight(double value) {
-    emit(WeightingModified(state.weightData.copyWith(weight: value)));
+  updateWeight(double value, bool isKilos) {
+    double kilos;
+    double pounds;
+
+    kilos = isKilos ? value : value / ratioKiloPounds;
+    pounds = isKilos ? value * ratioKiloPounds : value;
+    emit(WeightingModified(
+        state.weightData.copyWith(kilos: kilos, pounds: pounds)));
   }
 
   // savingWeightingData() {
