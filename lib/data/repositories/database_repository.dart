@@ -1,3 +1,4 @@
+import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
@@ -58,5 +59,19 @@ class DatabaseRepository {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<void> addUserExercise(FitUser user) async {
+    List<FitExercise> exercises = [...user.exercises];
+    exercises.add(FitExercise(
+        name: "Test1",
+        nbReps: 10,
+        topic: "idWorkoutArms",
+        nbSeries: 4,
+        weight: 50));
+    await _db.collection("users").doc(user.uid).set({
+      'exercises': exercises.map((e) => e.toMap()).toList(),
+    }, SetOptions(merge: true));
+    // TODO ADD REAL EXERCISE DATA
   }
 }

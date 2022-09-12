@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'package:fitnam/data/models/fit_machine.dart';
+import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
 
 class FitWorkout extends Equatable {

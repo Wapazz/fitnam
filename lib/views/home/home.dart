@@ -61,9 +61,9 @@ class HomePage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const FitMotto(),
-                  const SizedBox(height: 50),
-                  Text("${DateTime.now()}",
-                      style: const TextStyle(color: Colors.white)),
+                  const SizedBox(height: 30),
+                  // Text("${DateTime.now()}",
+                  //     style: const TextStyle(color: Colors.white)),
                   const SizedBox(height: 20),
                   // TODO ADD FIRST PROFILE SETUP & FIRST PESEE
                   if (hasWeighting) const WeightingCard(),

@@ -18,7 +18,7 @@ class TopicActivationCard extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(width: 1.0, color: Colors.grey),
+            top: BorderSide(width: 1.0, color: Color(0xFF636363)),
           ),
         ),
         child: Padding(

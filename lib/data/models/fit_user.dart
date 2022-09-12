@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/data/start/workout_data.dart';
 
@@ -13,6 +14,7 @@ class FitUser extends Equatable {
   final FitWeighting? lastWeighting;
   final DateTime? lastWorkout;
   final bool europeanMetrics;
+  final List<FitExercise> exercises;
 
   const FitUser({
     required this.uid,
@@ -21,6 +23,7 @@ class FitUser extends Equatable {
     this.program = programData,
     this.lastWeighting,
     this.lastWorkout,
+    this.exercises = const [],
     this.europeanMetrics = true,
   });
 
@@ -37,6 +40,7 @@ class FitUser extends Equatable {
         avatar,
         program,
         lastWeighting,
+        exercises,
         lastWorkout,
         europeanMetrics,
       ];
@@ -46,6 +50,8 @@ class FitUser extends Equatable {
       'uid': uid,
       'name': name,
       'avatar': avatar,
+      'exercises':
+          exercises.isNotEmpty ? exercises.map((e) => e.toMap()).toList() : [],
       'program': program.isNotEmpty
           ? program.map((x) => x.toMap()).toList()
           : programData,
@@ -60,6 +66,10 @@ class FitUser extends Equatable {
       uid: map['uid'],
       name: map['name'],
       avatar: map['avatar'],
+      exercises: map['exercises'] != null
+          ? List<FitExercise>.from(
+              map['exercises']?.map((x) => FitExercise.fromMap(x)))
+          : [],
       program: map['program'] != null
           ? List<WorkoutTopic>.from(
               map['program']?.map((x) => WorkoutTopic.fromMap(x)))
@@ -84,6 +94,7 @@ class FitUser extends Equatable {
     String? name,
     String? avatar,
     List<WorkoutTopic>? program,
+    List<FitExercise>? exercises,
     FitWeighting? lastWeighting,
     DateTime? lastWorkout,
     bool? europeanMetrics,
@@ -93,6 +104,7 @@ class FitUser extends Equatable {
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
       program: program ?? this.program,
+      exercises: exercises ?? this.exercises,
       lastWeighting: lastWeighting ?? this.lastWeighting,
       lastWorkout: lastWorkout ?? this.lastWorkout,
       europeanMetrics: europeanMetrics ?? this.europeanMetrics,

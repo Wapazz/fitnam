@@ -51,4 +51,11 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
     });
   }
+
+  Future<void> addExercise() async {
+    await Future.delayed(const Duration(milliseconds: 1200), () async {
+      await databaseRepository.addUserExercise(state.user);
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+    });
+  }
 }

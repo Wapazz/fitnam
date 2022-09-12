@@ -36,21 +36,23 @@ class WeightingCard extends StatelessWidget {
                       SizedBox(
                         width: 60,
                         child: Image.asset(
-                          "assets/avatar/default.png",
+                          "assets/workout/idWeighting.png",
                           fit: BoxFit.contain,
                         ),
                       ),
-                      Text(
+                      const SizedBox(height: 5),
+                      const Text(
                         "C'est le jour de la pesee",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
-                      Text(
+                      const SizedBox(height: 5),
+                      const Text(
                           "Se peser une fois par semaine évite les frustrations et montre les vrais progrès.",
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 20,
                   child: Icon(
                     FontAwesomeIcons.chevronRight,

@@ -22,6 +22,7 @@ class SessionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO ADD WILLPOP SCOPE FOR ALL PAGES
+    print(user.exercises);
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
@@ -34,7 +35,13 @@ class SessionPage extends StatelessWidget {
           if (state is WorkoutInitial) {
             return SetupSession(program: state.program);
           } else {
-            return const WorkoutPage();
+            return WorkoutPage(
+              user: user,
+              program:
+                  state.program.where((e) => e.name != "idWeighting").toList(),
+              exercices: state.exercises,
+              selectedIndex: state.selectedIndex,
+            );
           }
         })),
       ),

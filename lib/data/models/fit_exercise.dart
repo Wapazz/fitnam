@@ -17,6 +17,7 @@ class FitExercise {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
+      'topic': topic,
       'nbReps': nbReps,
       'nbSeries': nbSeries,
       'weight': weight,

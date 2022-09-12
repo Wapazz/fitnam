@@ -15,8 +15,7 @@ class SetupSession extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<WorkoutTopic> displayedProgram = [...program]
-      ..sort(((a, b) => a.schedule[DateTime.now().weekday - 1] ? 0 : 1));
+    bool _ctaIsInactive = program.where((e) => e.name != "idWeighting").isEmpty;
 
     return Stack(
       children: [
@@ -98,15 +97,23 @@ class SetupSession extends StatelessWidget {
                             padding: const EdgeInsets.all(0.0),
                             child: SlideAction(
                               borderRadius: 0,
-                              onSubmit: () {
-                                context.read<WorkoutCubit>().startWorkout();
-                              },
-                              innerColor: Theme.of(context).primaryColor,
+                              onSubmit: _ctaIsInactive
+                                  ? null
+                                  : () {
+                                      context
+                                          .read<WorkoutCubit>()
+                                          .startWorkout();
+                                    },
+                              innerColor: _ctaIsInactive
+                                  ? Colors.grey
+                                  : Theme.of(context).primaryColor,
                               outerColor: Colors.grey[800],
                               text: "  Demarrer maintenant",
                               textStyle: TextStyle(
                                   fontSize: 14,
-                                  color: Theme.of(context).primaryColor),
+                                  color: _ctaIsInactive
+                                      ? Colors.grey
+                                      : Theme.of(context).primaryColor),
                             ),
                           );
                         },
