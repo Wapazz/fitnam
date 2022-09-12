@@ -3,28 +3,34 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 import 'package:fitnam/data/models/fit_machine.dart';
+import 'package:fitnam/data/models/workout_topic.dart';
 
 class FitWorkout extends Equatable {
   final DateTime date;
-  final List<FitMachine> machines;
+  final List<WorkoutTopic> topics;
+  final List<FitExercise> exercises;
 
-  const FitWorkout({required this.date, required this.machines});
+  const FitWorkout(
+      {required this.date, required this.topics, required this.exercises});
 
   @override
-  List<Object?> get props => [date, ...machines];
+  List<Object?> get props => [date, ...exercises];
 
   Map<String, dynamic> toMap() {
     return {
       'date': date.millisecondsSinceEpoch,
-      'machines': machines.map((x) => x.toMap()).toList(),
+      'topics': topics.map((x) => x.toMap()).toList(),
+      'exercises': exercises.map((x) => x.toMap()).toList(),
     };
   }
 
   factory FitWorkout.fromMap(Map<String, dynamic> map) {
     return FitWorkout(
       date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      machines: List<FitMachine>.from(
-          map['machines']?.map((x) => FitMachine.fromMap(x))),
+      topics: List<WorkoutTopic>.from(
+          map['topics']?.map((x) => WorkoutTopic.fromMap(x))),
+      exercises: List<FitExercise>.from(
+          map['exercises']?.map((x) => FitExercise.fromMap(x))),
     );
   }
 
@@ -35,11 +41,13 @@ class FitWorkout extends Equatable {
 
   FitWorkout copyWith({
     DateTime? date,
-    List<FitMachine>? machines,
+    List<FitExercise>? exercises,
+    List<WorkoutTopic>? topics,
   }) {
     return FitWorkout(
       date: date ?? this.date,
-      machines: machines ?? this.machines,
+      topics: topics ?? this.topics,
+      exercises: exercises ?? this.exercises,
     );
   }
 }

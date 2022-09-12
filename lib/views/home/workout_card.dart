@@ -16,12 +16,15 @@ class WorkoutCard extends StatelessWidget {
     for (WorkoutTopic topic in program) {
       if (topic.name != "idWeighting" && topic.schedule[todaysIndex]) {
         activites.add(
-          SizedBox(
-            width: 60,
-            child: Image.asset(
-              // RENDRE VARIABLE
-              "assets/avatar/default.png",
-              fit: BoxFit.contain,
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: SizedBox(
+              width: 60,
+              child: Image.asset(
+                // RENDRE VARIABLE
+                "assets/workout/${topic.name}.png",
+                fit: BoxFit.contain,
+              ),
             ),
           ),
         );
@@ -60,11 +63,12 @@ class WorkoutCard extends StatelessWidget {
                       Row(
                         children: [...generateActivitiesIcons()],
                       ),
-                      Text(
+                      const SizedBox(height: 5),
+                      const Text(
                         "Seance de sport",
                         style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
-                      Text(
+                      const Text(
                           "On se donne a fond aujourdhui et on sera content demain !",
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
                     ],

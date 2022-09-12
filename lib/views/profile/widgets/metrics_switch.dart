@@ -32,7 +32,7 @@ class _MetricsSwitchState extends State<MetricsSwitch> {
     return Stack(
       children: [
         Container(
-          color: Colors.grey,
+          color: const Color(0xFF636363),
           height: _height,
           width: _width,
         ),

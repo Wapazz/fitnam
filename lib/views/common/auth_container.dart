@@ -7,7 +7,6 @@ import 'package:fitnam/views/profile/profile.dart';
 import 'package:fitnam/views/session/session.dart';
 import 'package:fitnam/views/stats/stats.dart';
 import 'package:fitnam/views/weighting/weighting.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +44,10 @@ class AuthContainer extends StatelessWidget {
       } else if (state is CurrentUserOnboarding) {
         return const OnboardingPage();
       }
-      return const Scaffold(body: Center(child: Text("fail")));
+      return const Scaffold(
+          body: Center(
+              child:
+                  Text("Erreur inconnue, veuillez relancer l'application.")));
     });
   }
 }

@@ -1,9 +1,9 @@
 import 'package:fitnam/bloc/profile/profile_cubit.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
 import 'package:fitnam/data/start/workout_data.dart';
+import 'package:fitnam/views/profile/widgets/schedule_dot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TopicSchedule extends StatelessWidget {
   const TopicSchedule({Key? key, required this.topic}) : super(key: key);
@@ -14,9 +14,10 @@ class TopicSchedule extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
+            radius: 30,
             child:
-                Center(child: Icon(FontAwesomeIcons.placeOfWorship, size: 30)),
+                Center(child: Image.asset("assets/workout/${topic.name}.png")),
           ),
           const SizedBox(width: 20),
           Column(
@@ -50,17 +51,11 @@ class ScheduleWidget extends StatelessWidget {
     for (int i = 0; i < topic.schedule.length; i++) {
       res.add(Padding(
         padding: const EdgeInsets.only(right: 5.0),
-        child: GestureDetector(
+        child: ScheduleDot(
+          isSelected: topic.schedule[i],
+          index: i,
           onTap: () =>
               context.read<ProfileCubit>().updateTopicSchedule(topic, i),
-          child: Container(
-            height: 30,
-            width: 30,
-            color: topic.schedule[i]
-                ? Theme.of(context).primaryColor
-                : Colors.grey,
-            child: Center(child: Text(weekdays[i])),
-          ),
         ),
       ));
     }

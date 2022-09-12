@@ -18,7 +18,7 @@ class FitFab extends StatelessWidget {
       overlayOpacity: 0.8,
       children: [
         SpeedDialChild(
-          child: const Icon(FontAwesomeIcons.handFist),
+          child: const Icon(FontAwesomeIcons.plus),
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.black,
           labelShadow: [],
@@ -58,7 +58,7 @@ class FitFab extends StatelessWidget {
           onTap: () => context.read<CurrentUserCubit>().onNavigateToProfile(),
         ),
         SpeedDialChild(
-          child: const Icon(FontAwesomeIcons.leaf),
+          child: const Icon(FontAwesomeIcons.squareUpRight),
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.black,
           labelShadow: [],
