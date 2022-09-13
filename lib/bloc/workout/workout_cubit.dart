@@ -29,4 +29,18 @@ class WorkoutCubit extends Cubit<WorkoutState> {
   changeIndex(int idx) {
     emit(WorkoutStarted(state.program, state.exercises, idx));
   }
+
+  changeExercises(List<FitExercise> exercices) {
+    emit(WorkoutStarted(state.program, exercices, state.selectedIndex));
+  }
+
+  clickExercise(FitExercise exercise) {
+    List<FitExercise> tmpList = [...state.exercises];
+    if (tmpList.contains(exercise)) {
+      tmpList.remove(exercise);
+    } else {
+      tmpList.add(exercise);
+    }
+    emit(WorkoutStarted(state.program, tmpList, state.selectedIndex));
+  }
 }

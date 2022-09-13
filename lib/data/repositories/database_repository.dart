@@ -61,17 +61,33 @@ class DatabaseRepository {
     }
   }
 
-  Future<void> addUserExercise(FitUser user) async {
+  Future<void> addUserExercise(FitUser user, String topic, int nb) async {
     List<FitExercise> exercises = [...user.exercises];
     exercises.add(FitExercise(
-        name: "Test1",
-        nbReps: 10,
-        topic: "idWorkoutArms",
-        nbSeries: 4,
-        weight: 50));
+      uid: uidGen.v4(),
+      name: "Exercice $nb",
+      nbReps: 10,
+      topic: topic,
+      nbSeries: 4,
+      kilos: 50,
+    ));
     await _db.collection("users").doc(user.uid).set({
       'exercises': exercises.map((e) => e.toMap()).toList(),
     }, SetOptions(merge: true));
-    // TODO ADD REAL EXERCISE DATA
+  }
+
+  Future<void> removeUserExercise(FitUser user, FitExercise exo) async {
+    List<FitExercise> exercises = [...user.exercises];
+    FitExercise confirm = exercises.firstWhere(
+        (element) => element.uid == exo.uid,
+        orElse: () => FitExercise.empty);
+
+    if (confirm.isEmpty) {
+      return;
+    }
+    exercises.remove(confirm);
+    await _db.collection("users").doc(user.uid).set({
+      'exercises': exercises.map((e) => e.toMap()).toList(),
+    }, SetOptions(merge: true));
   }
 }

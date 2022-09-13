@@ -22,7 +22,6 @@ class SessionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO ADD WILLPOP SCOPE FOR ALL PAGES
-    print(user.exercises);
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {

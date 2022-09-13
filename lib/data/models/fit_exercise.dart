@@ -1,35 +1,51 @@
 import 'dart:convert';
 
+import 'package:fitnam/data/models/fit_user.dart';
+
 class FitExercise {
+  final String uid;
   final String name;
   final String topic;
   final int nbReps;
   final int nbSeries;
-  final double weight;
+  final double kilos;
+  final double pounds;
 
-  FitExercise(
-      {required this.name,
-      required this.nbReps,
-      required this.topic,
-      required this.nbSeries,
-      required this.weight});
+  const FitExercise({
+    required this.name,
+    required this.uid,
+    required this.nbReps,
+    required this.topic,
+    required this.nbSeries,
+    this.kilos = 0,
+    this.pounds = 0,
+  });
+
+  static const empty =
+      FitExercise(name: '', uid: '', nbReps: 0, topic: '', nbSeries: 0);
+  bool get isEmpty => this == empty;
+  bool get isNotEmpty => !isEmpty;
 
   Map<String, dynamic> toMap() {
     return {
+      'uid': uid,
       'name': name,
       'topic': topic,
       'nbReps': nbReps,
       'nbSeries': nbSeries,
-      'weight': weight,
+      'kilos': kilos,
+      'pounds': pounds,
     };
   }
 
   factory FitExercise.fromMap(Map<String, dynamic> map) {
     return FitExercise(
+      uid: map['uid'],
       name: map['name'],
       nbReps: map['nbReps'],
       nbSeries: map['nbSeries'],
-      weight: map['weight'],
+      pounds: map['pounds'],
+      kilos: map['kilos'],
       topic: map['topic'],
     );
   }
@@ -40,18 +56,22 @@ class FitExercise {
       FitExercise.fromMap(json.decode(source));
 
   FitExercise copyWith({
+    String? uid,
     String? name,
     String? topic,
     int? nbReps,
     int? nbSeries,
-    double? weight,
+    double? kilos,
+    double? pounds,
   }) {
     return FitExercise(
+      uid: uid ?? this.uid,
       name: name ?? this.name,
       topic: topic ?? this.topic,
       nbReps: nbReps ?? this.nbReps,
       nbSeries: nbSeries ?? this.nbSeries,
-      weight: weight ?? this.weight,
+      kilos: kilos ?? this.kilos,
+      pounds: pounds ?? this.pounds,
     );
   }
 }

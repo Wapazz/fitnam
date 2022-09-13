@@ -25,7 +25,7 @@ class CurrentUserAvailable extends CurrentUserState {
       {this.navigation = AppNavigation.firstHome});
 
   @override
-  List<Object> get props => [navigation];
+  List<Object> get props => [navigation, user];
 
   CurrentUserAvailable copyWith({
     AppNavigation? navigation,

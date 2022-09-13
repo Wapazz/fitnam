@@ -15,7 +15,7 @@ class SetupSession extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _ctaIsInactive = program.where((e) => e.name != "idWeighting").isEmpty;
+    bool ctaIsInactive = program.where((e) => e.name != "idWeighting").isEmpty;
 
     return Stack(
       children: [
@@ -97,21 +97,21 @@ class SetupSession extends StatelessWidget {
                             padding: const EdgeInsets.all(0.0),
                             child: SlideAction(
                               borderRadius: 0,
-                              onSubmit: _ctaIsInactive
+                              onSubmit: ctaIsInactive
                                   ? null
                                   : () {
                                       context
                                           .read<WorkoutCubit>()
                                           .startWorkout();
                                     },
-                              innerColor: _ctaIsInactive
+                              innerColor: ctaIsInactive
                                   ? Colors.grey
                                   : Theme.of(context).primaryColor,
                               outerColor: Colors.grey[800],
                               text: "  Demarrer maintenant",
                               textStyle: TextStyle(
                                   fontSize: 14,
-                                  color: _ctaIsInactive
+                                  color: ctaIsInactive
                                       ? Colors.grey
                                       : Theme.of(context).primaryColor),
                             ),

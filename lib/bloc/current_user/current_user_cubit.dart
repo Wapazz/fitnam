@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/data/models/profile_form_data.dart';
@@ -52,10 +53,11 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
     });
   }
 
-  Future<void> addExercise() async {
-    await Future.delayed(const Duration(milliseconds: 1200), () async {
-      await databaseRepository.addUserExercise(state.user);
-      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
-    });
+  Future<void> addExercise(String topic, int nb) async {
+    await databaseRepository.addUserExercise(state.user, topic, nb);
+  }
+
+  Future<void> removeExercise(FitExercise exercise) async {
+    await databaseRepository.removeUserExercise(state.user, exercise);
   }
 }

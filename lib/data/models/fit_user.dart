@@ -40,7 +40,7 @@ class FitUser extends Equatable {
         avatar,
         program,
         lastWeighting,
-        exercises,
+        ...exercises,
         lastWorkout,
         europeanMetrics,
       ];
