@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FitDialog extends StatelessWidget {
@@ -27,10 +25,11 @@ class FitDialog extends StatelessWidget {
             color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
       ),
       content: const Text(
-        "Vous allez supprimer un exercice et toutes les donnees associees a celui ci.\nEtes vous sur de vouloir le supprimer ?",
+        "Vous allez supprimer un exercice et toutes les donnees associees a celui ci.\n\nEtes-vous sur de vouloir le supprimer ?",
         style: TextStyle(color: Colors.white, fontSize: 14),
       ),
-      actionsAlignment: MainAxisAlignment.spaceEvenly,
+      insetPadding: EdgeInsets.all(16),
+      actionsAlignment: MainAxisAlignment.center,
       actions: [
         GestureDetector(
           onTap: () {
@@ -40,11 +39,15 @@ class FitDialog extends StatelessWidget {
             Navigator.pop(context);
           },
           child: Container(
-              color: Theme.of(context).primaryColor,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6),
-                child: Text("Annuler"),
-              )),
+            width: MediaQuery.of(context).size.width / 3,
+            color: Theme.of(context).primaryColor,
+            child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 6),
+                child: Center(
+                  child: Text("Annuler",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                )),
+          ),
         ),
         if (onConfirm != null)
           GestureDetector(
@@ -52,9 +55,15 @@ class FitDialog extends StatelessWidget {
               onConfirm!();
               Navigator.pop(context);
             },
-            child: Text(
-              confirmTitle ?? 'OK',
-              style: const TextStyle(color: Colors.white),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width / 3,
+              child: Center(
+                child: Text(
+                  confirmTitle ?? 'OK',
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ),
       ],

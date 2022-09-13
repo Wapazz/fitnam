@@ -36,10 +36,18 @@ class WorkoutCubit extends Cubit<WorkoutState> {
 
   clickExercise(FitExercise exercise) {
     List<FitExercise> tmpList = [...state.exercises];
-    if (tmpList.contains(exercise)) {
+    if (tmpList.map((e) => e.uid).toList().contains(exercise.uid)) {
       tmpList.remove(exercise);
     } else {
       tmpList.add(exercise);
+    }
+    emit(WorkoutStarted(state.program, tmpList, state.selectedIndex));
+  }
+
+  removeExercise(FitExercise exercise) {
+    List<FitExercise> tmpList = [...state.exercises];
+    if (tmpList.map((e) => e.uid).toList().contains(exercise.uid)) {
+      tmpList.remove(exercise);
     }
     emit(WorkoutStarted(state.program, tmpList, state.selectedIndex));
   }

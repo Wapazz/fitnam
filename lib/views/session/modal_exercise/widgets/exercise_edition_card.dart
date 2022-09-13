@@ -2,6 +2,7 @@ import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/workout/workout_cubit.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/views/common/widget/fit_dialog.dart';
+import 'package:fitnam/views/session/modal_exercise/widgets/dual_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,14 +27,21 @@ class ExerciseEditionCard extends StatelessWidget {
               onChanged: (_) =>
                   context.read<WorkoutCubit>().clickExercise(exercise)),
           const SizedBox(width: 15),
+
           Expanded(
-              child: Text(
-            exercise.name,
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                fontSize: 14),
-          )),
+            child: DualTextField(
+              exercise: exercise,
+              isBold: isSelected,
+            ),
+          ),
+          // Expanded(
+          //     child: Text(
+          //   exercise.name,
+          //   style: TextStyle(
+          //       color: Colors.white,
+          //       fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          //       fontSize: 14),
+          // )),
           IconButton(
               onPressed: () {
                 showDialog(

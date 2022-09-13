@@ -90,4 +90,21 @@ class DatabaseRepository {
       'exercises': exercises.map((e) => e.toMap()).toList(),
     }, SetOptions(merge: true));
   }
+
+  Future<void> renameUserExercise(
+      FitUser user, FitExercise exo, String name) async {
+    List<FitExercise> exercises = [...user.exercises];
+    FitExercise confirm = exercises.firstWhere(
+        (element) => element.uid == exo.uid,
+        orElse: () => FitExercise.empty);
+
+    if (confirm.isEmpty) {
+      return;
+    }
+    exercises.replaceRange(exercises.indexOf(confirm),
+        exercises.indexOf(confirm) + 1, [confirm.copyWith(name: name)]);
+    await _db.collection("users").doc(user.uid).set({
+      'exercises': exercises.map((e) => e.toMap()).toList(),
+    }, SetOptions(merge: true));
+  }
 }

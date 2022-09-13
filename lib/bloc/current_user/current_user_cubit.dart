@@ -60,4 +60,8 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
   Future<void> removeExercise(FitExercise exercise) async {
     await databaseRepository.removeUserExercise(state.user, exercise);
   }
+
+  Future<void> renameExercise(FitExercise exercise, String name) async {
+    await databaseRepository.renameUserExercise(state.user, exercise, name);
+  }
 }

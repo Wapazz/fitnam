@@ -27,8 +27,6 @@ class WorkoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Exercice from workoutpage:");
-    print(context.read<WorkoutCubit>().state.exercises);
     var cubit = BlocProvider.of<WorkoutCubit>(context);
 
     return Stack(
@@ -71,6 +69,7 @@ class WorkoutPage extends StatelessWidget {
                         .where((element) =>
                             element.topic == program[selectedIndex].name)
                         .toList()),
+                const SizedBox(height: 15),
                 Center(
                   child: IconButton(
                     onPressed: () => showCupertinoModalBottomSheet(
