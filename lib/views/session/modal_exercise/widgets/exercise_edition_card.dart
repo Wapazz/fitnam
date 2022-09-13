@@ -27,21 +27,12 @@ class ExerciseEditionCard extends StatelessWidget {
               onChanged: (_) =>
                   context.read<WorkoutCubit>().clickExercise(exercise)),
           const SizedBox(width: 15),
-
           Expanded(
             child: DualTextField(
               exercise: exercise,
               isBold: isSelected,
             ),
           ),
-          // Expanded(
-          //     child: Text(
-          //   exercise.name,
-          //   style: TextStyle(
-          //       color: Colors.white,
-          //       fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-          //       fontSize: 14),
-          // )),
           IconButton(
               onPressed: () {
                 showDialog(
@@ -61,6 +52,7 @@ class ExerciseEditionCard extends StatelessWidget {
                               .removeExercise(exercise);
                         },
                         title: 'Attention !',
+                        confirmTitle: 'Suppprimer',
                       );
                     });
               },

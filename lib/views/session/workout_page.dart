@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
-import 'exercises_page.dart';
+import 'widgets/exercises_list.dart';
 
 class WorkoutPage extends StatelessWidget {
   const WorkoutPage(
@@ -64,7 +64,7 @@ class WorkoutPage extends StatelessWidget {
                             index: index),
                   ),
                 ),
-                ExercisesPage(
+                ExercisesList(
                     exercises: exercices
                         .where((element) =>
                             element.topic == program[selectedIndex].name)

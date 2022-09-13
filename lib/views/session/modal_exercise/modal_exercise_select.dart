@@ -14,10 +14,11 @@ class ModalExerciseSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = !FocusScope.of(context).hasPrimaryFocus;
+
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
-
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
@@ -46,7 +47,9 @@ class ModalExerciseSelect extends StatelessWidget {
                     ? const Text(
                         "Oh non la liste est vide ajoute un exercise a se sujet d'entrainement (tu peux aussi les preparer a l'avance dans ton profil)")
                     : SizedBox(
-                        height: MediaQuery.of(context).size.height - 230,
+                        height: isKeyboardOpen
+                            ? MediaQuery.of(context).size.height - 500
+                            : MediaQuery.of(context).size.height - 230,
                         child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: exercises.length,
@@ -71,7 +74,8 @@ class ModalExerciseSelect extends StatelessWidget {
                           .read<CurrentUserCubit>()
                           .addExercise(topic, exercises.length + 1);
                     }),
-                    icon: const Icon(FontAwesomeIcons.plus))
+                    icon: const Icon(FontAwesomeIcons.plus)),
+                if (isKeyboardOpen) const SizedBox(height: 250),
               ],
             );
           },

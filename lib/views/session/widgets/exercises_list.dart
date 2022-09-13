@@ -1,8 +1,8 @@
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:flutter/material.dart';
 
-class ExercisesPage extends StatelessWidget {
-  const ExercisesPage({Key? key, required this.exercises}) : super(key: key);
+class ExercisesList extends StatelessWidget {
+  const ExercisesList({Key? key, required this.exercises}) : super(key: key);
   final List<FitExercise> exercises;
   @override
   Widget build(BuildContext context) {
