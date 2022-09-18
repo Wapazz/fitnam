@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
+import 'package:fitnam/data/models/last_workout.dart';
 import 'package:fitnam/data/start/workout_data.dart';
 
 import 'workout_topic.dart';
@@ -12,7 +13,7 @@ class FitUser extends Equatable {
   final String avatar;
   final List<WorkoutTopic> program;
   final FitWeighting? lastWeighting;
-  final DateTime? lastWorkout;
+  final LastWorkout? lastWorkout;
   final bool europeanMetrics;
   final List<FitExercise> exercises;
 
@@ -56,7 +57,7 @@ class FitUser extends Equatable {
           ? program.map((x) => x.toMap()).toList()
           : programData,
       'lastWeighting': lastWeighting?.toMap(),
-      'lastWorkout': lastWorkout?.millisecondsSinceEpoch,
+      'lastWorkout': lastWorkout?.toMap(),
       'europeanMetrics': europeanMetrics,
     };
   }
@@ -78,7 +79,7 @@ class FitUser extends Equatable {
           ? FitWeighting.fromMap(map['lastWeighting'])
           : null,
       lastWorkout: map['lastWorkout'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['lastWorkout'])
+          ? LastWorkout.fromMap(map['lastWorkout'])
           : null,
       europeanMetrics: map['europeanMetrics'],
     );
@@ -96,7 +97,7 @@ class FitUser extends Equatable {
     List<WorkoutTopic>? program,
     List<FitExercise>? exercises,
     FitWeighting? lastWeighting,
-    DateTime? lastWorkout,
+    LastWorkout? lastWorkout,
     bool? europeanMetrics,
   }) {
     return FitUser(

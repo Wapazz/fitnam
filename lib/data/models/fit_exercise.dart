@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
-import 'package:fitnam/data/models/fit_user.dart';
 
 class FitExercise extends Equatable {
   final String uid;
@@ -11,6 +9,7 @@ class FitExercise extends Equatable {
   final int nbSeries;
   final double kilos;
   final double pounds;
+  final bool isCompleted;
 
   const FitExercise({
     required this.name,
@@ -20,6 +19,7 @@ class FitExercise extends Equatable {
     required this.nbSeries,
     this.kilos = 0,
     this.pounds = 0,
+    this.isCompleted = false,
   });
 
   static const empty =
@@ -64,6 +64,7 @@ class FitExercise extends Equatable {
     int? nbSeries,
     double? kilos,
     double? pounds,
+    bool? isCompleted,
   }) {
     return FitExercise(
       uid: uid ?? this.uid,
@@ -73,9 +74,11 @@ class FitExercise extends Equatable {
       nbSeries: nbSeries ?? this.nbSeries,
       kilos: kilos ?? this.kilos,
       pounds: pounds ?? this.pounds,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 
   @override
-  List<Object?> get props => [uid, name, topic];
+  List<Object?> get props =>
+      [uid, name, topic, isCompleted, pounds, kilos, nbReps, nbSeries];
 }

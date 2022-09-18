@@ -1,5 +1,6 @@
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/workout/workout_cubit.dart';
+import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
 import 'package:fitnam/data/start/workout_data.dart';
 import 'package:fitnam/views/session/widgets/topic_activation_card.dart';
@@ -100,9 +101,12 @@ class SetupSession extends StatelessWidget {
                               onSubmit: ctaIsInactive
                                   ? null
                                   : () {
-                                      context
-                                          .read<WorkoutCubit>()
-                                          .startWorkout();
+                                      FitUser user = context
+                                          .read<CurrentUserCubit>()
+                                          .state
+                                          .user;
+                                      context.read<WorkoutCubit>().startWorkout(
+                                          user.lastWorkout, user.exercises);
                                     },
                               innerColor: ctaIsInactive
                                   ? Colors.grey

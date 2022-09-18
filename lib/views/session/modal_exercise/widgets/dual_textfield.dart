@@ -30,7 +30,7 @@ class _DualTextFieldState extends State<DualTextField> {
         if (!value) {
           if (widget.isBold) {
             // Change workoutCubit Data if already in the list
-            context.read<WorkoutCubit>().removeExercise(widget.exercise);
+            context.read<WorkoutCubit>().clickExercise(widget.exercise);
           }
           // Change CurrentUserCubit Data
           context

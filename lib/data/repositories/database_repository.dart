@@ -2,6 +2,7 @@ import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
+import 'package:fitnam/data/models/last_workout.dart';
 import 'package:fitnam/data/models/profile_form_data.dart';
 import 'package:uuid/uuid.dart';
 
@@ -106,5 +107,48 @@ class DatabaseRepository {
     await _db.collection("users").doc(user.uid).set({
       'exercises': exercises.map((e) => e.toMap()).toList(),
     }, SetOptions(merge: true));
+  }
+
+  Future<void> saveSession(
+      FitUser user, List<FitExercise> session, String currentSession) async {
+    List<FitExercise> exercises = [...user.exercises];
+
+    for (FitExercise ex in session) {
+      FitExercise confirm = exercises.firstWhere(
+          (element) => element.uid == ex.uid,
+          orElse: () => FitExercise.empty);
+      if (confirm.isNotEmpty) {
+        exercises.replaceRange(
+            exercises.indexOf(confirm), exercises.indexOf(confirm) + 1, [ex]);
+      }
+    }
+
+    String sessionUid =
+        currentSession.isNotEmpty ? currentSession : uidGen.v4();
+    LastWorkout lw = LastWorkout(date: DateTime.now(), sessionUid: sessionUid);
+
+    await _db.collection("users").doc(user.uid).set({
+      'exercises': exercises.map((e) => e.toMap()).toList(),
+      'lastWorkout': lw.toMap(),
+    }, SetOptions(merge: true));
+
+    await _db.collection("session").doc(sessionUid).set({
+      'uid': sessionUid,
+      'userId': user.uid,
+      'exercises': session.map((e) => e.toMap()).toList(),
+    });
+  }
+
+  Future<List<FitExercise>> getLastWorkoutExercises(String sessionId) async {
+    List<FitExercise> ret = [];
+    await _db.collection("session").doc(sessionId).get().then((doc) {
+      ret = doc['exercises'] != null
+          ? List<FitExercise>.from(
+              doc['exercises']?.map((x) => FitExercise.fromMap(x)))
+          : [];
+      print("ret is set");
+    });
+    print("returning final ret");
+    return ret;
   }
 }

@@ -40,14 +40,14 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
 
   Future<void> saveProfile(ProfileFormData data) async {
-    await Future.delayed(const Duration(milliseconds: 1200), () async {
+    await Future.delayed(const Duration(milliseconds: 1000), () async {
       await databaseRepository.saveProfile(state.user, data);
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
     });
   }
 
   Future<void> saveWeightData(FitWeighting data) async {
-    await Future.delayed(const Duration(milliseconds: 1200), () async {
+    await Future.delayed(const Duration(milliseconds: 1000), () async {
       await databaseRepository.saveWeightData(state.user, data);
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
     });
@@ -63,5 +63,12 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
 
   Future<void> renameExercise(FitExercise exercise, String name) async {
     await databaseRepository.renameUserExercise(state.user, exercise, name);
+  }
+
+  Future<void> saveSession(List<FitExercise> session, String sessionId) async {
+    await Future.delayed(const Duration(milliseconds: 1000), () async {
+      await databaseRepository.saveSession(state.user, session, sessionId);
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+    });
   }
 }

@@ -1,16 +1,29 @@
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/core/date_helper.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
+import 'package:fitnam/data/models/last_workout.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
+import 'package:fitnam/data/repositories/database_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'workout_state.dart';
 
 class WorkoutCubit extends Cubit<WorkoutState> {
+  final DatabaseRepository _db = DatabaseRepository();
   WorkoutCubit(List<WorkoutTopic> activated)
-      : super(WorkoutInitial(activated, const [], 0));
+      : super(WorkoutInitial(activated, const [], 0, "", ""));
 
-  startWorkout() {
-    emit(WorkoutStarted(state.program, state.exercises, state.selectedIndex));
+  startWorkout(LastWorkout? lastWorkout, List<FitExercise> allExercises) async {
+    List<FitExercise> exercises = [];
+    String lastSessionUid = "";
+    if (lastWorkout != null && DateHelper.isToday(lastWorkout.date)) {
+      exercises = await _db.getLastWorkoutExercises(lastWorkout.sessionUid);
+      lastSessionUid = lastWorkout.sessionUid;
+    } else {
+      exercises = allExercises;
+    }
+    emit(WorkoutStarted(state.program, exercises, state.selectedIndex,
+        state.expandedExercise, lastSessionUid));
   }
 
   changeProgram(WorkoutTopic topic) {
@@ -23,32 +36,53 @@ class WorkoutCubit extends Cubit<WorkoutState> {
       // REMOVE FROM PROGRAM
       program.remove(topic);
     }
-    emit(WorkoutInitial(program, state.exercises, state.selectedIndex));
+    emit(WorkoutInitial(program, state.exercises, state.selectedIndex,
+        state.expandedExercise, state.currentSession));
   }
 
   changeIndex(int idx) {
-    emit(WorkoutStarted(state.program, state.exercises, idx));
+    emit(WorkoutStarted(state.program, state.exercises, idx,
+        state.expandedExercise, state.currentSession));
   }
 
   changeExercises(List<FitExercise> exercices) {
-    emit(WorkoutStarted(state.program, exercices, state.selectedIndex));
+    emit(WorkoutStarted(state.program, exercices, state.selectedIndex,
+        state.expandedExercise, state.currentSession));
   }
 
   clickExercise(FitExercise exercise) {
     List<FitExercise> tmpList = [...state.exercises];
-    if (tmpList.map((e) => e.uid).toList().contains(exercise.uid)) {
-      tmpList.remove(exercise);
+    FitExercise confirm = tmpList.firstWhere(
+        (element) => element.uid == exercise.uid,
+        orElse: () => FitExercise.empty);
+
+    if (confirm.isNotEmpty) {
+      tmpList.remove(confirm);
     } else {
       tmpList.add(exercise);
     }
-    emit(WorkoutStarted(state.program, tmpList, state.selectedIndex));
+
+    emit(WorkoutStarted(state.program, tmpList, state.selectedIndex,
+        state.expandedExercise, state.currentSession));
   }
 
-  removeExercise(FitExercise exercise) {
+  editExercise(FitExercise exercise) {
     List<FitExercise> tmpList = [...state.exercises];
-    if (tmpList.map((e) => e.uid).toList().contains(exercise.uid)) {
-      tmpList.remove(exercise);
+    FitExercise confirm = tmpList.firstWhere(
+        (element) => element.uid == exercise.uid,
+        orElse: () => FitExercise.empty);
+
+    if (confirm.isEmpty) {
+      return;
     }
-    emit(WorkoutStarted(state.program, tmpList, state.selectedIndex));
+    tmpList.replaceRange(
+        tmpList.indexOf(confirm), tmpList.indexOf(confirm) + 1, [exercise]);
+    emit(WorkoutStarted(state.program, tmpList, state.selectedIndex,
+        state.expandedExercise, state.currentSession));
+  }
+
+  expandExercise(FitExercise exercise) {
+    emit(WorkoutStarted(state.program, state.exercises, state.selectedIndex,
+        exercise.uid, state.currentSession));
   }
 }
