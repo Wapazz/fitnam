@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/core/date_helper.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/last_workout.dart';
@@ -20,7 +21,10 @@ class WorkoutCubit extends Cubit<WorkoutState> {
       exercises = await _db.getLastWorkoutExercises(lastWorkout.sessionUid);
       lastSessionUid = lastWorkout.sessionUid;
     } else {
-      exercises = allExercises;
+      exercises = allExercises
+          .where((element) =>
+              state.program.map((e) => e.name).toList().contains(element.topic))
+          .toList();
     }
     emit(WorkoutStarted(state.program, exercises, state.selectedIndex,
         state.expandedExercise, lastSessionUid));

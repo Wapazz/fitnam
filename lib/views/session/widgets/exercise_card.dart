@@ -1,5 +1,6 @@
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/workout/workout_cubit.dart';
+import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,8 +72,12 @@ class ExerciseCard extends StatelessWidget {
                   "Poids",
                   (int value) => context.read<WorkoutCubit>().editExercise(
                       isKilos
-                          ? exercise.copyWith(kilos: value.toDouble())
-                          : exercise.copyWith(pounds: value.toDouble())),
+                          ? exercise.copyWith(
+                              kilos: value.toDouble(),
+                              pounds: value * ratioKiloPounds)
+                          : exercise.copyWith(
+                              pounds: value.toDouble(),
+                              kilos: value / ratioKiloPounds)),
                   isKilos ? exercise.kilos.toInt() : exercise.pounds.toInt(),
                   10,
                   300),
