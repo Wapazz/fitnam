@@ -5,6 +5,7 @@ import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/views/common/widget/animated_cta.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
+import 'package:fitnam/views/common/widget/secured_scaffold.dart';
 import 'package:fitnam/views/weighting/widgets/mass_slider.dart';
 import 'package:fitnam/views/weighting/widgets/title_with_info_button.dart';
 import 'package:fitnam/views/weighting/widgets/title_with_weight.dart';
@@ -30,8 +31,7 @@ class WeightingPage extends StatelessWidget {
       }));
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+    return SecuredScaffold(
       body: BlocConsumer<WeightingCubit, WeightingState>(
         listener: ((context, state) {}),
         builder: (context, state) {

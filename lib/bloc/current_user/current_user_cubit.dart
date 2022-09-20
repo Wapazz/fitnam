@@ -30,14 +30,17 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
 
   void onNavigateToProfile() => emit(
       CurrentUserAvailable(state.user, navigation: AppNavigation.settings));
+  void onNavigateToAvatar() =>
+      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.avatar));
   void onNavigateToSession() =>
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.session));
   void onNavigateToStats() =>
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.stats));
   void onNavigateToWeighting() => emit(
       CurrentUserAvailable(state.user, navigation: AppNavigation.weighting));
-  void onNavigateBack() =>
-      emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+  void onNavigateBack({AppNavigation from = AppNavigation.home}) {
+    emit(CurrentUserAvailable(state.user, navigation: from));
+  }
 
   Future<void> saveProfile(ProfileFormData data) async {
     await Future.delayed(const Duration(milliseconds: 1000), () async {
@@ -69,6 +72,14 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
     await Future.delayed(const Duration(milliseconds: 1000), () async {
       await databaseRepository.saveSession(state.user, session, sessionId);
       emit(CurrentUserAvailable(state.user, navigation: AppNavigation.home));
+    });
+  }
+
+  Future<void> saveAvatar(String avatar) async {
+    await Future.delayed(const Duration(milliseconds: 1000), () async {
+      await databaseRepository.saveAvatar(state.user, avatar);
+      emit(CurrentUserAvailable(state.user.copyWith(avatar: avatar),
+          navigation: AppNavigation.backToSettings));
     });
   }
 }

@@ -3,6 +3,7 @@ import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/core/routes.dart';
 import 'package:fitnam/views/home/home.dart';
 import 'package:fitnam/views/onboarding/onboarding.dart';
+import 'package:fitnam/views/profile/avatar_selection/avatar_selection.dart';
 import 'package:fitnam/views/profile/profile.dart';
 import 'package:fitnam/views/session/session.dart';
 import 'package:fitnam/views/stats/stats.dart';
@@ -31,6 +32,11 @@ class AuthContainer extends StatelessWidget {
           Navigator.push(context, StatsPage.route(state.user));
         } else if (state.navigation == AppNavigation.weighting) {
           Navigator.push(context, WeightingPage.route(state.user));
+        } else if (state.navigation == AppNavigation.avatar) {
+          Navigator.push(context,
+              AvatarPage.route(state.user.avatar, state.user.nbWorkout));
+        } else if (state.navigation == AppNavigation.backToSettings) {
+          Navigator.pop(context);
         }
         if (state.navigation == AppNavigation.home) {
           Navigator.pop(context);

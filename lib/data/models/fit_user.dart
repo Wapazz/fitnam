@@ -11,6 +11,7 @@ class FitUser extends Equatable {
   final String uid;
   final String name;
   final String avatar;
+  final int nbWorkout;
   final List<WorkoutTopic> program;
   final FitWeighting? lastWeighting;
   final LastWorkout? lastWorkout;
@@ -21,6 +22,7 @@ class FitUser extends Equatable {
     required this.uid,
     required this.name,
     required this.avatar,
+    required this.nbWorkout,
     this.program = programData,
     this.lastWeighting,
     this.lastWorkout,
@@ -28,7 +30,7 @@ class FitUser extends Equatable {
     this.europeanMetrics = true,
   });
 
-  static const empty = FitUser(uid: "", name: "", avatar: "");
+  static const empty = FitUser(uid: "", name: "", avatar: "", nbWorkout: 0);
   bool get isEmpty => this == empty;
   bool get isNotEmpty => !isEmpty;
 
@@ -44,6 +46,7 @@ class FitUser extends Equatable {
         ...exercises,
         lastWorkout,
         europeanMetrics,
+        nbWorkout,
       ];
 
   Map<String, dynamic> toMap() {
@@ -59,6 +62,7 @@ class FitUser extends Equatable {
       'lastWeighting': lastWeighting?.toMap(),
       'lastWorkout': lastWorkout?.toMap(),
       'europeanMetrics': europeanMetrics,
+      'nbWorkout': nbWorkout
     };
   }
 
@@ -82,6 +86,7 @@ class FitUser extends Equatable {
           ? LastWorkout.fromMap(map['lastWorkout'])
           : null,
       europeanMetrics: map['europeanMetrics'],
+      nbWorkout: map['nbWorkout'],
     );
   }
 
@@ -99,6 +104,7 @@ class FitUser extends Equatable {
     FitWeighting? lastWeighting,
     LastWorkout? lastWorkout,
     bool? europeanMetrics,
+    int? nbWorkout,
   }) {
     return FitUser(
       uid: uid ?? this.uid,
@@ -109,6 +115,7 @@ class FitUser extends Equatable {
       lastWeighting: lastWeighting ?? this.lastWeighting,
       lastWorkout: lastWorkout ?? this.lastWorkout,
       europeanMetrics: europeanMetrics ?? this.europeanMetrics,
+      nbWorkout: nbWorkout ?? this.nbWorkout,
     );
   }
 }

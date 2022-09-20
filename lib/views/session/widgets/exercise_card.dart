@@ -19,10 +19,10 @@ class ExerciseCard extends StatelessWidget {
           const SizedBox(height: 5),
           StepperSwipe(
             stepperValue: value,
-            initialValue: min,
+            initialValue: value,
             withBackground: false,
             withFastCount: true,
-            withPlusMinus: true,
+            // withPlusMinus: true,
             speedTransitionLimitCount: 3,
             onChanged: (value) => callback(value),
             firstIncrementDuration: const Duration(milliseconds: 250),

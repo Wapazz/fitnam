@@ -130,6 +130,8 @@ class DatabaseRepository {
     await _db.collection("users").doc(user.uid).set({
       'exercises': exercises.map((e) => e.toMap()).toList(),
       'lastWorkout': lw.toMap(),
+      'nbWorkout':
+          currentSession.isNotEmpty ? user.nbWorkout : user.nbWorkout + 1,
     }, SetOptions(merge: true));
 
     await _db.collection("session").doc(sessionUid).set({
@@ -146,9 +148,13 @@ class DatabaseRepository {
           ? List<FitExercise>.from(
               doc['exercises']?.map((x) => FitExercise.fromMap(x)))
           : [];
-      print("ret is set");
     });
-    print("returning final ret");
     return ret;
+  }
+
+  Future<void> saveAvatar(FitUser user, String avatar) async {
+    await _db.collection("users").doc(user.uid).set({
+      'avatar': avatar,
+    }, SetOptions(merge: true));
   }
 }

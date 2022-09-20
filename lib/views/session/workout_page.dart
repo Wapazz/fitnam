@@ -73,7 +73,6 @@ class WorkoutPage extends StatelessWidget {
                           .where((element) =>
                               element.topic == program[selectedIndex].name)
                           .toList()),
-                  const SizedBox(height: 15),
                   Center(
                     child: IconButton(
                       onPressed: () => showCupertinoModalBottomSheet(
@@ -91,6 +90,7 @@ class WorkoutPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 80),
                 ],
               ),
             ),

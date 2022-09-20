@@ -33,34 +33,35 @@ class ExerciseEditionCard extends StatelessWidget {
               isBold: isSelected,
             ),
           ),
-          IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return FitDialog(
-                        message:
-                            'Vous allez supprimer un exercice et toutes les donnees associees a celui ci.\nEtes vous sur de vouloir le supprimer ?',
-                        onConfirm: () {
-                          if (isSelected) {
-                            context
-                                .read<WorkoutCubit>()
-                                .clickExercise(exercise);
-                          }
-                          context
-                              .read<CurrentUserCubit>()
-                              .removeExercise(exercise);
-                        },
-                        title: 'Attention !',
-                        confirmTitle: 'Suppprimer',
-                      );
-                    });
-              },
-              icon: const Icon(
-                FontAwesomeIcons.trash,
-                size: 16,
-                color: Colors.grey,
-              ))
+          // TODO ADD TO PROFILE MANAGEMENT
+          // IconButton(
+          //     onPressed: () {
+          //       showDialog(
+          //           context: context,
+          //           builder: (BuildContext context) {
+          //             return FitDialog(
+          //               message:
+          //                   'Vous allez supprimer un exercice et toutes les donnees associees a celui ci.\nEtes vous sur de vouloir le supprimer ?',
+          //               onConfirm: () {
+          //                 if (isSelected) {
+          //                   context
+          //                       .read<WorkoutCubit>()
+          //                       .clickExercise(exercise);
+          //                 }
+          //                 context
+          //                     .read<CurrentUserCubit>()
+          //                     .removeExercise(exercise);
+          //               },
+          //               title: 'Attention !',
+          //               confirmTitle: 'Suppprimer',
+          //             );
+          //           });
+          //     },
+          //     icon: const Icon(
+          //       FontAwesomeIcons.trash,
+          //       size: 16,
+          //       color: Colors.grey,
+          //     ))
         ],
       ),
     );

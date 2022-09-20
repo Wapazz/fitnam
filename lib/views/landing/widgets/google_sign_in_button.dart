@@ -9,27 +9,31 @@ class GoogleLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      color: Colors.white,
-      child: InkWell(
-        child: Ink(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(FontAwesomeIcons.google, color: Colors.black),
-                SizedBox(width: 20),
-                Text(
-                  "Se connecter avec Google",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Container(
+        color: Colors.white,
+        child: InkWell(
+          child: Ink(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(FontAwesomeIcons.google, color: Colors.black),
+                  SizedBox(width: 20),
+                  Text(
+                    "Se connecter avec Google",
+                    style: TextStyle(color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
+          onTap: () => context.read<AppBloc>().add(AppUserGoogleLogin()),
         ),
-        onTap: () => context.read<AppBloc>().add(AppUserGoogleLogin()),
       ),
     );
   }

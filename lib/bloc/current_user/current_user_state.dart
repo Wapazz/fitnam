@@ -1,6 +1,15 @@
 part of 'current_user_cubit.dart';
 
-enum AppNavigation { session, weighting, stats, settings, home, firstHome }
+enum AppNavigation {
+  session,
+  weighting,
+  stats,
+  settings,
+  home,
+  firstHome,
+  avatar,
+  backToSettings,
+}
 
 abstract class CurrentUserState extends Equatable {
   final FitUser user;

@@ -4,6 +4,7 @@ import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/data/models/profile_form_data.dart';
 import 'package:fitnam/views/common/widget/animated_cta.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
+import 'package:fitnam/views/common/widget/secured_scaffold.dart';
 import 'package:fitnam/views/profile/widgets/metrics_switch.dart';
 import 'package:fitnam/views/profile/widgets/topic_schedule.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SecuredScaffold(
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: ((context, state) {}),
         builder: (context, state) {
@@ -34,12 +35,19 @@ class ProfilePage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FitHeader(
-                          avatar: user.avatar,
-                          title: "Hello, ${user.firstName} !",
-                          message:
-                              "Construis ici ton programme de musculation jour par jour.",
-                          hasClosedBottom: true),
+                      BlocBuilder<CurrentUserCubit, CurrentUserState>(
+                        builder: (context, userState) {
+                          return FitHeader(
+                            avatar: userState.user.avatar,
+                            title: "Hello, ${user.firstName} !",
+                            message:
+                                "Construis ici ton programme de musculation jour par jour.",
+                            hasClosedBottom: true,
+                            isEditable: true,
+                            nbSession: user.nbWorkout,
+                          );
+                        },
+                      ),
                       const SizedBox(height: 30),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),

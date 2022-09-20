@@ -149,6 +149,7 @@ class AuthenticationRepository {
 
 extension on firebase_auth.User {
   FitUser get toUser {
-    return FitUser(uid: uid, name: displayName ?? "", avatar: "");
+    return FitUser(
+        uid: uid, name: displayName ?? "", avatar: "default.png", nbWorkout: 0);
   }
 }

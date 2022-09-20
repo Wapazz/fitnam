@@ -1,6 +1,7 @@
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/workout/workout_cubit.dart';
 import 'package:fitnam/data/models/fit_user.dart';
+import 'package:fitnam/views/common/widget/secured_scaffold.dart';
 import 'package:fitnam/views/session/setup_session.dart';
 import 'package:fitnam/views/session/workout_page.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +22,9 @@ class SessionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO ADD WILLPOP SCOPE FOR ALL PAGES
-    return Scaffold(
-      body: WillPopScope(
-        onWillPop: () async {
-          print("OULAH FAUT CHANGER LE STATE");
-          context.read<CurrentUserCubit>().onNavigateBack();
-          return true;
-        },
-        child:
-            BlocBuilder<WorkoutCubit, WorkoutState>(builder: ((context, state) {
+    return SecuredScaffold(
+      body: BlocBuilder<WorkoutCubit, WorkoutState>(
+        builder: ((context, state) {
           if (state is WorkoutInitial) {
             return SetupSession(program: state.program);
           } else {
@@ -42,7 +36,7 @@ class SessionPage extends StatelessWidget {
               selectedIndex: state.selectedIndex,
             );
           }
-        })),
+        }),
       ),
     );
   }
