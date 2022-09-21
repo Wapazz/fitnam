@@ -29,13 +29,43 @@ class FitHeader extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-              onTap: !isEditable
-                  ? null
-                  : () => context.read<CurrentUserCubit>().onNavigateToAvatar(),
-              // () => Navigator.push(
-              //     context, AvatarPage.route(avatar, nbSession)),
-              child: SizedBox(
-                  height: 80, child: Image.asset("assets/avatar/$avatar"))),
+            onTap: !isEditable
+                ? null
+                : () => context.read<CurrentUserCubit>().onNavigateToAvatar(),
+            child: !isEditable
+                ? SizedBox(
+                    height: 80, child: Image.asset("assets/avatar/$avatar"))
+                : SizedBox(
+                    height: 90,
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                            height: 80,
+                            child: Image.asset("assets/avatar/$avatar")),
+                        Positioned(
+                          bottom: 0,
+                          left: 24,
+                          child: CircleAvatar(
+                            radius: 16,
+                            backgroundColor: Colors.grey[700],
+                            child: CircleAvatar(
+                                radius: 15,
+                                backgroundColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                child: const Padding(
+                                  padding: EdgeInsets.all(2.0),
+                                  child: Icon(
+                                    FontAwesomeIcons.pencil,
+                                    color: Colors.white,
+                                    size: 12,
+                                  ),
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+          ),
           const SizedBox(width: 10),
           Flexible(
               child: Column(

@@ -39,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                         builder: (context, userState) {
                           return FitHeader(
                             avatar: userState.user.avatar,
-                            title: "Hello, ${user.firstName} !",
+                            title: "Profil & programme",
                             message:
                                 "Construis ici ton programme de musculation jour par jour.",
                             hasClosedBottom: true,
@@ -90,7 +90,7 @@ class ProfilePage extends StatelessWidget {
                   child: GestureDetector(
                     child: AnimatedCTA(
                       isActive: state is ProfileModified,
-                      message: 'Valider le profil',
+                      message: 'Sauvegarder',
                       onTap: () => context
                           .read<CurrentUserCubit>()
                           .saveProfile(state.profile),

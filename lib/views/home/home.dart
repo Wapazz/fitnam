@@ -2,6 +2,7 @@ import 'package:fitnam/core/date_helper.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
 import 'package:fitnam/views/home/motto.dart';
+import 'package:fitnam/views/home/profile_card.dart';
 import 'package:fitnam/views/home/workout_done_card.dart';
 import 'package:flutter/material.dart';
 
@@ -50,16 +51,15 @@ class HomePage extends StatelessWidget {
                   FitHeader(
                     avatar: user.avatar,
                     title: "Hello, ${user.firstName} !",
-                    message:
-                        "Découvre ici le programme de ta journée et n'oublie pas :",
+                    message: "Découvre ici le programme de ta journée",
                     hasClosedBottom: false,
                   ),
                   const SizedBox(height: 20),
                   const FitMotto(),
-                  const SizedBox(height: 30),
-                  const SizedBox(height: 20),
-                  // TODO ADD FIRST PROFILE SETUP & FIRST PESEE
-                  if (hasWeighting) const WeightingCard(),
+                  const SizedBox(height: 50),
+                  if (!hasProgram) const ProfileCard(),
+                  if (hasWeighting || !hasDoneWeighting)
+                    WeightingCard(isFirstTime: !hasDoneWeighting),
                   const SizedBox(height: 12),
                   if (hasWorkout)
                     WorkoutCard(

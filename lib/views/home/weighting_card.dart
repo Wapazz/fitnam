@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WeightingCard extends StatelessWidget {
-  const WeightingCard({Key? key}) : super(key: key);
+  const WeightingCard({Key? key, required this.isFirstTime}) : super(key: key);
+  final bool isFirstTime;
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +42,18 @@ class WeightingCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                      const Text(
-                        "C'est le jour de la pesee",
-                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      Text(
+                        isFirstTime ? "Pesée" : "C'est le jour de la pesée",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 15),
                       ),
                       const SizedBox(height: 5),
-                      const Text(
-                          "Se peser une fois par semaine évite les frustrations et montre les vrais progrès.",
-                          style: TextStyle(color: Colors.grey, fontSize: 12)),
+                      Text(
+                          isFirstTime
+                              ? "Commence par te peser une fois pour definir un point de départ"
+                              : "Se peser une fois par semaine évite les frustrations et montre les vrais progrès.",
+                          style: const TextStyle(
+                              color: Colors.grey, fontSize: 12)),
                     ],
                   ),
                 ),

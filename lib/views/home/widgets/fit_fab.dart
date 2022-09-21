@@ -16,6 +16,7 @@ class FitFab extends StatelessWidget {
       activeIcon: FontAwesomeIcons.xmark,
       overlayColor: Colors.black,
       overlayOpacity: 0.8,
+      spaceBetweenChildren: 8,
       children: [
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.plus),
@@ -24,7 +25,7 @@ class FitFab extends StatelessWidget {
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,
-          label: 'Seance',
+          label: 'Séance',
           onTap: () => context.read<CurrentUserCubit>().onNavigateToSession(),
         ),
         SpeedDialChild(
@@ -34,7 +35,7 @@ class FitFab extends StatelessWidget {
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,
-          label: 'Pesee',
+          label: 'Pesée',
           onTap: () => context.read<CurrentUserCubit>().onNavigateToWeighting(),
         ),
         SpeedDialChild(
@@ -51,7 +52,7 @@ class FitFab extends StatelessWidget {
           child: const Icon(FontAwesomeIcons.gear),
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.black,
-          label: 'Settings',
+          label: 'Profil',
           labelShadow: [],
           labelStyle: const TextStyle(color: Colors.white),
           labelBackgroundColor: Colors.transparent,
@@ -59,12 +60,12 @@ class FitFab extends StatelessWidget {
         ),
         SpeedDialChild(
           child: const Icon(FontAwesomeIcons.squareUpRight),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.grey[700],
           foregroundColor: Colors.black,
           labelShadow: [],
-          labelStyle: const TextStyle(color: Colors.white),
+          labelStyle: const TextStyle(color: Colors.grey),
           labelBackgroundColor: Colors.transparent,
-          label: 'Logout',
+          label: 'Déconnexion',
           onTap: () => context.read<AppBloc>().add(AppLogoutRequested()),
         ),
       ],

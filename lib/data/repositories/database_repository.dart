@@ -18,7 +18,8 @@ class DatabaseRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> completeOnboarding(FitUser user) async {
-    FitUser toCreate = user.copyWith(avatar: "default.png");
+    FitUser toCreate =
+        user.copyWith(avatar: "default.png", hasCompletedOnboarding: true);
     await Future.delayed(const Duration(milliseconds: 1200));
     await _db.collection("users").doc(user.uid).set(toCreate.toMap());
   }
@@ -44,8 +45,6 @@ class DatabaseRepository {
   }
 
   Future<void> saveWeightData(FitUser user, FitWeighting data) async {
-    // String currentDocUid =
-    //     "${user.uid}-${DateTime.now().month}-${DateTime.now().year}";
     FitWeighting upload = data.copyWith(date: DateTime.now());
     try {
       String uid = uidGen.v4();

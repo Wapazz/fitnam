@@ -27,7 +27,7 @@ class OnboardingPage extends StatelessWidget {
                   Container(
                     alignment: const Alignment(0, 0.2),
                     child: Text(
-                      "Creer ton programme",
+                      "Créer ton programme",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,
@@ -64,7 +64,7 @@ class OnboardingPage extends StatelessWidget {
                                   },
                                   innerColor: Theme.of(context).primaryColor,
                                   outerColor: Colors.grey[800],
-                                  text: "  Demarrer maintenant",
+                                  text: "  Démarrer maintenant",
                                   textStyle: TextStyle(
                                       fontSize: 14,
                                       color: Theme.of(context).primaryColor),

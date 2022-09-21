@@ -47,9 +47,9 @@ class WorkoutPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const FitHeader(
-                      avatar: "default.png",
-                      title: "Session",
+                  FitHeader(
+                      avatar: user.avatar,
+                      title: "Séance",
                       message:
                           "Voici ton programme du jour. A toi de renseigner les exercices effectués.",
                       hasClosedBottom: true),
@@ -105,7 +105,7 @@ class WorkoutPage extends StatelessWidget {
                 child: AnimatedCTA(
                   isActive: !exercices.any((e) => !e.isCompleted) &&
                       exercices.isNotEmpty,
-                  message: 'Terminer la session',
+                  message: 'Terminer la séance',
                   onTap: () => context.read<CurrentUserCubit>().saveSession(
                       cubit.state.exercises, cubit.state.currentSession),
                 ),

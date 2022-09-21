@@ -34,7 +34,7 @@ String workoutNameFromId(String id) {
     case "idWorkoutBack":
       return "Dos";
     case "idWeighting":
-      return "Pesee";
+      return "Pesée";
     default:
       return "";
   }
@@ -47,15 +47,15 @@ String workoutDescFromId(String id) {
     case "idWorkoutChest":
       return "Pectoraux";
     case "idWorkoutAbs":
-      return "Abdominaux, Crunch";
+      return "Abdominaux, crunch";
     case "idWorkoutLegs":
       return "Ischios, mollets";
     case "idWorkoutCardio":
-      return "Velo, moto, dodo";
+      return "Vélo, course, elliptique";
     case "idWorkoutBack":
       return "Dorsaux";
     case "idWeighting":
-      return "releve hebdo du poids";
+      return "Relevé hebdo du poids";
     default:
       return "";
   }

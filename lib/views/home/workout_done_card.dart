@@ -36,7 +36,7 @@ class WorkoutCompletedCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(children: const [
-                        Icon(FontAwesomeIcons.medal),
+                        Icon(FontAwesomeIcons.award),
                       ]),
                       const SizedBox(height: 5),
                       const Text(

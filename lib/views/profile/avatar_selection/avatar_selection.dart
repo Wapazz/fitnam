@@ -5,6 +5,7 @@ import 'package:fitnam/views/common/widget/secured_scaffold.dart';
 import 'package:fitnam/views/profile/avatar_selection/avatar_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const List<String> avatarData = [
   "default.png",
@@ -80,9 +81,22 @@ class AvatarPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 10),
-                          const Text(
-                            "Debloque les differents avatar en accomplissant tes seances de sport !",
-                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          Row(
+                            children: [
+                              const Flexible(
+                                child: Text(
+                                  "Débloque les différents avatars en accomplissant tes séances de sport !",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 17),
+                                ),
+                              ),
+                              IconButton(
+                                  onPressed: () => context
+                                      .read<CurrentUserCubit>()
+                                      .onNavigateBack(
+                                          from: AppNavigation.backToSettings),
+                                  icon: const Icon(FontAwesomeIcons.xmark))
+                            ],
                           ),
                           const SizedBox(height: 20),
                           Stack(children: [

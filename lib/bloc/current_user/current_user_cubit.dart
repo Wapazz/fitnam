@@ -16,7 +16,7 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
 
   void getStreamUser(FitUser user) {
     databaseRepository.streamUser(user).listen((users) {
-      if (users.avatar.isEmpty) {
+      if (!users.hasCompletedOnboarding) {
         emit(CurrentUserOnboarding(users));
       } else {
         emit(CurrentUserAvailable(users));

@@ -1,36 +1,10 @@
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
-import 'package:fitnam/data/models/workout_topic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class WorkoutCard extends StatelessWidget {
-  const WorkoutCard(
-      {Key? key, required this.program, required this.todaysIndex})
-      : super(key: key);
-  final List<WorkoutTopic> program;
-  final int todaysIndex;
-
-  generateActivitiesIcons() {
-    List<Widget> activites = [];
-    for (WorkoutTopic topic in program) {
-      if (topic.name != "idWeighting" && topic.schedule[todaysIndex]) {
-        activites.add(
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: SizedBox(
-              width: 60,
-              child: Image.asset(
-                "assets/workout/${topic.name}.png",
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-        );
-      }
-    }
-    return activites;
-  }
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +12,7 @@ class WorkoutCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: InkWell(
         onTap: () {
-          context.read<CurrentUserCubit>().onNavigateToSession();
+          context.read<CurrentUserCubit>().onNavigateToProfile();
         },
         child: Container(
           decoration: BoxDecoration(
@@ -59,17 +33,17 @@ class WorkoutCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [...generateActivitiesIcons()],
+                      Row(children: const [
+                        Icon(FontAwesomeIcons.gear),
+                      ]),
+                      const SizedBox(height: 5),
+                      const Text(
+                        "Programme & entraînement",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                       const SizedBox(height: 5),
                       const Text(
-                        "Séance de sport",
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                      const Text("Session du jour basée sur ton programme.",
-                          style: TextStyle(color: Colors.grey, fontSize: 12)),
-                      const Text("Clique la carte pour commencer.",
+                          "Configure ton programme d'entraînement et tes exercices pour les retrouver lors de ta première séance.",
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
                     ],
                   ),

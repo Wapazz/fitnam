@@ -118,7 +118,7 @@ class SetupSession extends StatelessWidget {
                                     ? Colors.grey
                                     : Theme.of(context).primaryColor,
                                 outerColor: Colors.grey[800],
-                                text: "  Demarrer maintenant",
+                                text: "  Démarrer maintenant",
                                 textStyle: TextStyle(
                                     fontSize: 14,
                                     color: ctaIsInactive
