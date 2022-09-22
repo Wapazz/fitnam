@@ -1,5 +1,4 @@
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
-import 'package:fitnam/views/profile/avatar_selection/avatar_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

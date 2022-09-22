@@ -10,7 +10,7 @@ class WeightingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10, top: 16),
       child: InkWell(
         onTap: () {
           context.read<CurrentUserCubit>().onNavigateToWeighting();
@@ -50,7 +50,7 @@ class WeightingCard extends StatelessWidget {
                       const SizedBox(height: 5),
                       Text(
                           isFirstTime
-                              ? "Commence par te peser une fois pour definir un point de départ"
+                              ? "Commence par te peser une fois pour définir un point de départ"
                               : "Se peser une fois par semaine évite les frustrations et montre les vrais progrès.",
                           style: const TextStyle(
                               color: Colors.grey, fontSize: 12)),

@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fitnam/data/models/fit_user.dart';
+
+import 'fit_user.dart';
 
 class WeightsList extends Equatable {
   final List<FitWeighting> data;

@@ -1,6 +1,5 @@
 import 'package:fitnam/bloc/app/app_bloc.dart';
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
-import 'package:fitnam/core/routes.dart';
 import 'package:fitnam/views/home/home.dart';
 import 'package:fitnam/views/onboarding/onboarding.dart';
 import 'package:fitnam/views/profile/avatar_selection/avatar_selection.dart';

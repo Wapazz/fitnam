@@ -4,6 +4,8 @@ import 'package:fitnam/views/session/widgets/exercise_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// TODO REDO ENTIRELY WITH CUSTOM
+
 // class ExercisesList extends StatelessWidget {
 //   const ExercisesList({Key? key, required this.exercises}) : super(key: key);
 //   final List<FitExercise> exercises;

@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:fitnam/core/constants.dart';
-import 'package:fitnam/data/models/workout_topic.dart';
 import 'package:fitnam/data/start/workout_data.dart';
 
 import 'fit_user.dart';
+import 'workout_topic.dart';
 
 class ProfileFormData extends Equatable {
   final String name;

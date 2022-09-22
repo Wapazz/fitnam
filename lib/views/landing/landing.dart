@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:fitnam/bloc/app/app_bloc.dart';
-import 'package:fitnam/views/landing/widgets/apple_sign_in_button.dart';
-import 'package:fitnam/views/landing/widgets/google_sign_in_button.dart';
-import 'package:fitnam/views/landing/widgets/social_signup_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'widgets/social_signup_button.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class LandingPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                      alignment: const Alignment(0, 0.4),
+                      alignment: Alignment(0, Platform.isIOS ? 0.4 : 0.7),
                       child: state.status == AppStatus.authLoading
                           ? const CircularProgressIndicator()
                           : SocialSignupButton(
@@ -47,14 +48,17 @@ class LandingPage extends StatelessWidget {
                               onTap: () => context
                                   .read<AppBloc>()
                                   .add(AppUserGoogleLogin()))),
-                  Container(
-                      alignment: const Alignment(0, 0.6),
-                      child: state.status == AppStatus.authLoading
-                          ? const CircularProgressIndicator()
-                          : SocialSignupButton(
-                              icon: FontAwesomeIcons.apple,
-                              title: "Se connecter avec Apple",
-                              onTap: () {})),
+                  if (Platform.isIOS)
+                    Container(
+                        alignment: const Alignment(0, 0.6),
+                        child: state.status == AppStatus.authLoading
+                            ? const CircularProgressIndicator()
+                            : SocialSignupButton(
+                                icon: FontAwesomeIcons.apple,
+                                title: "Se connecter avec Apple",
+                                onTap: () => context
+                                    .read<AppBloc>()
+                                    .add(AppUserAppleLogin()))),
                   Container(
                       alignment: const Alignment(0, 0.9),
                       child: const Padding(

@@ -18,14 +18,14 @@ class StatsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            icon: Icon(FontAwesomeIcons.chevronLeft),
+            icon: const Icon(FontAwesomeIcons.chevronLeft),
             onPressed: () => context.read<CurrentUserCubit>().onNavigateBack()),
-        title: Text("Stats"),
+        title: const Text("Stats"),
         actions: [
           IconButton(
               onPressed: () =>
                   context.read<AppBloc>().add(AppLogoutRequested()),
-              icon: Icon(FontAwesomeIcons.rightToBracket))
+              icon: const Icon(FontAwesomeIcons.rightToBracket))
         ],
       ),
       body: Container(),

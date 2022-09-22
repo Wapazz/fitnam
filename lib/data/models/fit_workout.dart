@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-import 'package:fitnam/data/models/fit_exercise.dart';
-import 'package:fitnam/data/models/workout_topic.dart';
+import 'fit_exercise.dart';
+import 'workout_topic.dart';
 
 class FitWorkout extends Equatable {
   final DateTime date;

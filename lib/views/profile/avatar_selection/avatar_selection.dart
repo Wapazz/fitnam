@@ -1,45 +1,13 @@
 import 'package:fitnam/bloc/avatar/avatar_cubit.dart';
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
+import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/views/common/widget/animated_cta.dart';
 import 'package:fitnam/views/common/widget/secured_scaffold.dart';
-import 'package:fitnam/views/profile/avatar_selection/avatar_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const List<String> avatarData = [
-  "default.png",
-  "balls.png",
-  "cupcake.png",
-  "flowers.png",
-  "house.png",
-  "lemon.png",
-  "numbers.png",
-  "pavement.png",
-  "phone.png",
-  "sign.png",
-  "smileys.png",
-  "sunflowers.png",
-  "umbrella.png",
-  "wall.png"
-];
-
-const List<int> avatarRequirements = [
-  0,
-  0,
-  0,
-  1,
-  5,
-  10,
-  20,
-  30,
-  40,
-  50,
-  100,
-  150,
-  200,
-  300
-];
+import 'avatar_card.dart';
 
 class AvatarPage extends StatelessWidget {
   const AvatarPage({Key? key, required this.avatar, required this.nbSession})

@@ -1,4 +1,3 @@
-import 'package:fitnam/bloc/app/app_bloc.dart';
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/weighting/weighting_cubit.dart';
 import 'package:fitnam/data/models/fit_user.dart';
@@ -6,12 +5,13 @@ import 'package:fitnam/data/models/fit_weighting.dart';
 import 'package:fitnam/views/common/widget/animated_cta.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
 import 'package:fitnam/views/common/widget/secured_scaffold.dart';
-import 'package:fitnam/views/weighting/widgets/mass_slider.dart';
-import 'package:fitnam/views/weighting/widgets/title_with_info_button.dart';
-import 'package:fitnam/views/weighting/widgets/title_with_weight.dart';
-import 'package:fitnam/views/weighting/widgets/weight_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'widgets/mass_slider.dart';
+import 'widgets/title_with_info_button.dart';
+import 'widgets/title_with_weight.dart';
+import 'widgets/weight_slider.dart';
 
 class WeightingPage extends StatelessWidget {
   const WeightingPage({Key? key, required this.user}) : super(key: key);
@@ -44,7 +44,7 @@ class WeightingPage extends StatelessWidget {
                     children: [
                       FitHeader(
                         avatar: user.avatar,
-                        title: "Hello, ${user.firstName} !",
+                        title: "Pesée",
                         message:
                             "C'est le moment de noter les résultats de tous tes courageux efforts.",
                         hasClosedBottom: true,
@@ -66,15 +66,19 @@ class WeightingPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       MassSlider(
                           mass: state.weightData.fatMass,
-                          initialValue: 30,
+                          initialValue: 25,
+                          min: 2,
+                          max: 60,
                           onChange: (double value) => context
                               .read<WeightingCubit>()
                               .updateFatMass(value)),
                       const TitleWithInfobutton(title: "Masse Musculaire"),
                       const SizedBox(height: 20),
                       MassSlider(
+                          min: 5,
+                          max: 75,
                           mass: state.weightData.muscularMass,
-                          initialValue: 70,
+                          initialValue: 50,
                           onChange: (double value) => context
                               .read<WeightingCubit>()
                               .updateMuscularMass(value)),
@@ -92,7 +96,7 @@ class WeightingPage extends StatelessWidget {
                   child: GestureDetector(
                     child: AnimatedCTA(
                       isActive: true,
-                      message: 'Sauvegarder la pesee',
+                      message: 'Sauvegarder la pesée',
                       onTap: () {
                         context
                             .read<CurrentUserCubit>()

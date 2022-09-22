@@ -13,6 +13,8 @@ class AppLoadRemoteConfig extends AppEvent {}
 
 class AppUserGoogleLogin extends AppEvent {}
 
+class AppUserAppleLogin extends AppEvent {}
+
 class AppUserChanged extends AppEvent {
   @visibleForTesting
   const AppUserChanged(this.user);

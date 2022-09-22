@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
-import 'package:fitnam/data/models/fit_exercise.dart';
-import 'package:fitnam/data/models/fit_weighting.dart';
-import 'package:fitnam/data/models/last_workout.dart';
 import 'package:fitnam/data/start/workout_data.dart';
 
+import 'fit_exercise.dart';
+import 'fit_weighting.dart';
+import 'last_workout.dart';
 import 'workout_topic.dart';
 
 class FitUser extends Equatable {

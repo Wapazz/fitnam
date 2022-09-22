@@ -20,11 +20,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
     on<AppUserGoogleLogin>(_onUserGoogleLogin);
-
-    // on<AppNavigationToProfile>(_onNavigateToProfile);
-    // on<AppNavigationToWeight>(_onNavigateToWeights);
-    // on<AppNavigationToWorkout>(_onNavigateToWorkout);
-    // on<AppNavigationToStats>(_onNavigateToStats);
+    on<AppUserAppleLogin>(_onUserAppleLogin);
 
     _userSubscription = _authenticationRepository.user.listen(
       (user) => add(AppUserChanged(user)),
@@ -43,18 +39,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     );
   }
 
-  // void _onNavigateToProfile(
-  //         AppNavigationToProfile event, Emitter<AppState> emit) =>
-  //     emit(AppState.profile(event.user));
-  // void _onNavigateToStats(AppNavigationToStats event, Emitter<AppState> emit) =>
-  //     emit(AppState.stats(event.user));
-  // void _onNavigateToWorkout(
-  //         AppNavigationToWorkout event, Emitter<AppState> emit) =>
-  //     emit(AppState.workout(event.user));
-  // void _onNavigateToWeights(
-  //         AppNavigationToWeight event, Emitter<AppState> emit) =>
-  //     emit(AppState.weighting(event.user));
-
   void _onLogoutRequested(AppLogoutRequested event, Emitter<AppState> emit) {
     unawaited(_authenticationRepository.logOut());
   }
@@ -64,6 +48,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(const AppState.authLoading());
     try {
       await _authenticationRepository.logInWithGoogle();
+    } catch (_) {
+      emit(const AppState.unauthenticated());
+    }
+  }
+
+  void _onUserAppleLogin(
+      AppUserAppleLogin event, Emitter<AppState> emit) async {
+    emit(const AppState.authLoading());
+    try {
+      await _authenticationRepository.logInWithApple();
     } catch (_) {
       emit(const AppState.unauthenticated());
     }

@@ -24,11 +24,11 @@ class FitDialog extends StatelessWidget {
         style: GoogleFonts.arsenal(
             color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
       ),
-      content: const Text(
-        "Vous allez supprimer un exercice et toutes les donnees associees a celui ci.\n\nEtes-vous sur de vouloir le supprimer ?",
-        style: TextStyle(color: Colors.white, fontSize: 14),
+      content: Text(
+        message,
+        style: const TextStyle(color: Colors.white, fontSize: 14),
       ),
-      insetPadding: EdgeInsets.all(16),
+      insetPadding: const EdgeInsets.all(16),
       actionsAlignment: MainAxisAlignment.center,
       actions: [
         GestureDetector(

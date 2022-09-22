@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 final appTheme = ThemeData(
   textTheme: GoogleFonts.poppinsTextTheme()
-      .copyWith(bodySmall: TextStyle(color: Colors.white)),
+      .copyWith(bodySmall: const TextStyle(color: Colors.white)),
   brightness: Brightness.dark,
   primaryColorDark: const Color(0xFFFEE666),
   primaryColorLight: const Color.fromARGB(255, 237, 209, 139),
@@ -12,7 +12,7 @@ final appTheme = ThemeData(
       seedColor: const Color(0xFFFEE666),
       secondary: const Color(0xFFFEE666),
       brightness: Brightness.dark),
-  scaffoldBackgroundColor: Color(0xFF141313),
+  scaffoldBackgroundColor: const Color(0xFF141313),
   inputDecorationTheme: InputDecorationTheme(
     floatingLabelStyle:
         MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {

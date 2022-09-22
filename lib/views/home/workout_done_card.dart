@@ -1,7 +1,5 @@
 import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,7 +9,7 @@ class WorkoutCompletedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.only(left: 10.0, right: 10, top: 16),
       child: InkWell(
         onTap: () {
           context.read<CurrentUserCubit>().onNavigateToSession();
@@ -52,7 +50,7 @@ class WorkoutCompletedCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 20,
                   child: Icon(
                     FontAwesomeIcons.chevronRight,

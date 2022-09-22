@@ -1,11 +1,8 @@
-import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/workout/workout_cubit.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
-import 'package:fitnam/views/common/widget/fit_dialog.dart';
-import 'package:fitnam/views/session/modal_exercise/widgets/dual_textfield.dart';
+import 'package:fitnam/views/common/widget/dual_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ExerciseEditionCard extends StatelessWidget {
   const ExerciseEditionCard(
@@ -33,35 +30,6 @@ class ExerciseEditionCard extends StatelessWidget {
               isBold: isSelected,
             ),
           ),
-          // TODO ADD TO PROFILE MANAGEMENT
-          // IconButton(
-          //     onPressed: () {
-          //       showDialog(
-          //           context: context,
-          //           builder: (BuildContext context) {
-          //             return FitDialog(
-          //               message:
-          //                   'Vous allez supprimer un exercice et toutes les donnees associees a celui ci.\nEtes vous sur de vouloir le supprimer ?',
-          //               onConfirm: () {
-          //                 if (isSelected) {
-          //                   context
-          //                       .read<WorkoutCubit>()
-          //                       .clickExercise(exercise);
-          //                 }
-          //                 context
-          //                     .read<CurrentUserCubit>()
-          //                     .removeExercise(exercise);
-          //               },
-          //               title: 'Attention !',
-          //               confirmTitle: 'Suppprimer',
-          //             );
-          //           });
-          //     },
-          //     icon: const Icon(
-          //       FontAwesomeIcons.trash,
-          //       size: 16,
-          //       color: Colors.grey,
-          //     ))
         ],
       ),
     );

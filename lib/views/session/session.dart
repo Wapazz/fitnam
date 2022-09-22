@@ -1,11 +1,11 @@
-import 'package:fitnam/bloc/current_user/current_user_cubit.dart';
 import 'package:fitnam/bloc/workout/workout_cubit.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/views/common/widget/secured_scaffold.dart';
-import 'package:fitnam/views/session/setup_session.dart';
-import 'package:fitnam/views/session/workout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'setup_session.dart';
+import 'workout_page.dart';
 
 class SessionPage extends StatelessWidget {
   const SessionPage({Key? key, required this.user}) : super(key: key);

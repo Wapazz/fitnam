@@ -3,6 +3,7 @@ import 'package:fitnam/data/models/fit_user.dart';
 import 'package:fitnam/views/common/widget/fit_header.dart';
 import 'package:fitnam/views/home/motto.dart';
 import 'package:fitnam/views/home/profile_card.dart';
+import 'package:fitnam/views/home/rest_card.dart';
 import 'package:fitnam/views/home/workout_done_card.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,8 @@ class HomePage extends StatelessWidget {
         hasProgram &&
         user.program
             .any((e) => e.name != "idWeighting" && e.schedule[todaysIndex - 1]);
+    bool programIsSet =
+        user.program.any((e) => e.schedule.any((element) => element));
 
     return Scaffold(
       floatingActionButton: const FitFab(),
@@ -50,21 +53,23 @@ class HomePage extends StatelessWidget {
                 children: [
                   FitHeader(
                     avatar: user.avatar,
-                    title: "Hello, ${user.firstName} !",
+                    title:
+                        "Salut${user.firstName.isEmpty ? '' : ','} ${user.firstName}!",
                     message: "Découvre ici le programme de ta journée",
                     hasClosedBottom: false,
                   ),
                   const SizedBox(height: 20),
                   const FitMotto(),
                   const SizedBox(height: 50),
-                  if (!hasProgram) const ProfileCard(),
-                  if (hasWeighting || !hasDoneWeighting)
-                    WeightingCard(isFirstTime: !hasDoneWeighting),
-                  const SizedBox(height: 12),
+                  if (!programIsSet) const ProfileCard(),
+                  if (hasWeighting || user.lastWeighting == null)
+                    WeightingCard(isFirstTime: user.lastWeighting == null),
                   if (hasWorkout)
                     WorkoutCard(
                         program: user.program, todaysIndex: todaysIndex - 1),
                   if (hasDoneWorkout) const WorkoutCompletedCard(),
+                  if (!hasWorkout && !hasWeighting && !hasDoneWorkout)
+                    const RestCard()
                 ],
               )),
             ),
