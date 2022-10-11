@@ -23,86 +23,107 @@ class FitHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Row(
-        children: [
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        if (hasClosedBottom)
           GestureDetector(
-            onTap: !isEditable
-                ? null
-                : () => context.read<CurrentUserCubit>().onNavigateToAvatar(),
-            child: !isEditable
-                ? SizedBox(
-                    height: 80, child: Image.asset("assets/avatar/$avatar"))
-                : SizedBox(
-                    height: 90,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                            height: 80,
-                            child: Image.asset("assets/avatar/$avatar")),
-                        Positioned(
-                          bottom: 0,
-                          left: 24,
-                          child: CircleAvatar(
-                            radius: 16,
-                            backgroundColor: Colors.grey[700],
-                            child: CircleAvatar(
-                                radius: 15,
-                                backgroundColor:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(
-                                    FontAwesomeIcons.pencil,
-                                    color: Colors.white,
-                                    size: 12,
-                                  ),
-                                )),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-          ),
-          const SizedBox(width: 10),
-          Flexible(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      title,
-                      overflow: TextOverflow.fade,
-                      maxLines: 1,
-                      style: GoogleFonts.arsenal(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  if (hasClosedBottom)
-                    IconButton(
-                        onPressed: () =>
-                            context.read<CurrentUserCubit>().onNavigateBack(),
-                        icon: const Icon(
-                          FontAwesomeIcons.xmark,
-                          color: Colors.white,
-                        ))
-                ],
+            onTap: () => context.read<CurrentUserCubit>().onNavigateBack(),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 20.0, top: 8),
+              child: Icon(
+                FontAwesomeIcons.xmark,
+                color: Colors.white,
               ),
-              Text(
-                message,
-                style: GoogleFonts.inter(color: Colors.white, fontSize: 12),
-              )
+            ),
+          ),
+        // IconButton(
+        //     padding: EdgeInsets.zero,
+        //     onPressed: () =>
+        //         context.read<CurrentUserCubit>().onNavigateBack(),
+        //     icon: const Padding(
+        //       padding: EdgeInsets.only(right: 5.0),
+        //       child: Icon(
+        //         FontAwesomeIcons.xmark,
+        //         color: Colors.white,
+        //       ),
+        //     )),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: !isEditable
+                    ? null
+                    : () =>
+                        context.read<CurrentUserCubit>().onNavigateToAvatar(),
+                child: !isEditable
+                    ? SizedBox(
+                        height: 80, child: Image.asset("assets/avatar/$avatar"))
+                    : SizedBox(
+                        height: 90,
+                        child: Stack(
+                          children: [
+                            SizedBox(
+                                height: 80,
+                                child: Image.asset("assets/avatar/$avatar")),
+                            Positioned(
+                              bottom: 0,
+                              left: 24,
+                              child: CircleAvatar(
+                                radius: 16,
+                                backgroundColor: Colors.grey[700],
+                                child: CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                    child: const Padding(
+                                      padding: EdgeInsets.all(2.0),
+                                      child: Icon(
+                                        FontAwesomeIcons.pencil,
+                                        color: Colors.white,
+                                        size: 12,
+                                      ),
+                                    )),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+              ),
+              const SizedBox(width: 10),
+              Flexible(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          overflow: TextOverflow.fade,
+                          maxLines: 1,
+                          style: GoogleFonts.arsenal(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    message,
+                    style: GoogleFonts.inter(color: Colors.white, fontSize: 12),
+                  )
+                ],
+              ))
             ],
-          ))
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

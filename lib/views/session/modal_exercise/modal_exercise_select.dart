@@ -15,26 +15,35 @@ class ModalExerciseSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isKeyboardOpen = !FocusScope.of(context).hasPrimaryFocus;
-
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height - 100,
-        child: Material(child: BlocBuilder<CurrentUserCubit, CurrentUserState>(
-          builder: (context, state) {
-            List<FitExercise> exercises = state.user.exercises
-                .where((element) => element.topic == topic)
-                .toList();
-            return Column(
+    return BlocBuilder<CurrentUserCubit, CurrentUserState>(
+      builder: (context, state) {
+        bool isKeyboardOpen = !FocusScope.of(context).hasPrimaryFocus;
+        List<FitExercise> exercises = state.user.exercises
+            .where((element) => element.topic == topic)
+            .toList();
+        return GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+              // TODO TRIGGER REBUILD
+            }
+          },
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height - 100,
+            child: Material(
+                child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const SizedBox(height: 15),
+                Container(
+                  height: 6,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(15)),
+                ),
+                const SizedBox(height: 24),
                 Text(
                   "Exercices ${workoutNameFromId(topic)}",
                   style: GoogleFonts.arsenal(
@@ -45,12 +54,19 @@ class ModalExerciseSelect extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 exercises.isEmpty
-                    ? const Text(
-                        "Oh non la liste est vide ajoute un exercise a se sujet d'entrainement (tu peux aussi les preparer a l'avance dans ton profil)")
+                    ? const Padding(
+                        padding:
+                            EdgeInsets.only(top: 20.0, left: 16, right: 16),
+                        child: Text(
+                          "Oh non la liste est vide !\nAjoute un(e) exercice/machine pour ce sujet d'entrainement en cliquant sur le '+'\n\n(Tu peux aussi les preparer a l'avance dans ton profil)",
+                          style: TextStyle(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
                     : SizedBox(
                         height: isKeyboardOpen
                             ? MediaQuery.of(context).size.height - 500
-                            : MediaQuery.of(context).size.height - 230,
+                            : MediaQuery.of(context).size.height - 250,
                         child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: exercises.length,
@@ -78,10 +94,10 @@ class ModalExerciseSelect extends StatelessWidget {
                     icon: const Icon(FontAwesomeIcons.plus)),
                 if (isKeyboardOpen) const SizedBox(height: 250),
               ],
-            );
-          },
-        )),
-      ),
+            )),
+          ),
+        );
+      },
     );
   }
 }

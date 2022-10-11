@@ -12,7 +12,11 @@ class SettingsMenu extends StatelessWidget {
   List<Widget> _buildMenuIndexes(BuildContext context) {
     List<String> menus = [
       "Programme",
-      ...programData.map((e) => workoutNameFromId(e.name)),
+      ...programData
+          .where((element) => element.name != "idWeighting")
+          .toList()
+          .map((e) => workoutNameFromId(e.name)),
+      // ...programData.map((e) => workoutNameFromId(e.name)),
       "Unités"
     ];
     List<Widget> menusWidgets = [];

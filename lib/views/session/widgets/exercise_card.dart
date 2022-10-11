@@ -51,45 +51,54 @@ class ExerciseCard extends StatelessWidget {
             children: [
               _buildStepper(
                   context,
-                  "Séries",
+                  exercise.topic != "idWorkoutCardio"
+                      ? "Séries"
+                      : "Durée (min)",
                   (value) => context
                       .read<WorkoutCubit>()
                       .editExercise(exercise.copyWith(nbSeries: value)),
                   exercise.nbSeries,
                   1,
-                  10),
+                  exercise.topic != "idWorkoutCardio" ? 20 : 999),
               _buildStepper(
                   context,
-                  "Répétitions",
+                  exercise.topic != "idWorkoutCardio"
+                      ? "Répétitions"
+                      : "Calories",
                   (value) => context
                       .read<WorkoutCubit>()
                       .editExercise(exercise.copyWith(nbReps: value)),
                   exercise.nbReps,
                   1,
-                  30),
-              _buildStepper(
-                  context,
-                  "Poids",
-                  (int value) => context.read<WorkoutCubit>().editExercise(
-                      isKilos
-                          ? exercise.copyWith(
-                              kilos: value.toDouble(),
-                              pounds: value * ratioKiloPounds)
-                          : exercise.copyWith(
-                              pounds: value.toDouble(),
-                              kilos: value / ratioKiloPounds)),
-                  isKilos ? exercise.kilos.toInt() : exercise.pounds.toInt(),
-                  10,
-                  300),
+                  exercise.topic != "idWorkoutCardio" ? 50 : 999),
+              if (exercise.topic != "idWorkoutCardio")
+                _buildStepper(
+                    context,
+                    "Poids",
+                    (int value) => context.read<WorkoutCubit>().editExercise(
+                        isKilos
+                            ? exercise.copyWith(
+                                kilos: value.toDouble(),
+                                pounds: value * ratioKiloPounds)
+                            : exercise.copyWith(
+                                pounds: value.toDouble(),
+                                kilos: value / ratioKiloPounds)),
+                    isKilos ? exercise.kilos.toInt() : exercise.pounds.toInt(),
+                    1,
+                    999),
             ],
           ),
           const SizedBox(height: 22),
           InkWell(
             onTap: () {
-              context
-                  .read<WorkoutCubit>()
-                  .editExercise(exercise.copyWith(isCompleted: true));
-              context.read<WorkoutCubit>().expandExercise(FitExercise.empty);
+              WorkoutCubit cubit = context.read<WorkoutCubit>();
+              cubit.editExercise(exercise.copyWith(isCompleted: true));
+              cubit.expandExercise(FitExercise.empty);
+              context.read<CurrentUserCubit>().shadowSaveSession(
+                  cubit.state.exercises
+                      .where((element) => element.isCompleted)
+                      .toList(),
+                  cubit.state.currentSession);
             },
             child: Container(
               decoration: BoxDecoration(

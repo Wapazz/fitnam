@@ -1,3 +1,4 @@
+import 'package:fitnam/core/constants.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/data/models/fit_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,13 +65,13 @@ class DatabaseRepository {
   Future<void> addUserExercise(FitUser user, String topic, int nb) async {
     List<FitExercise> exercises = [...user.exercises];
     exercises.add(FitExercise(
-      uid: uidGen.v4(),
-      name: "Exercice $nb",
-      nbReps: 10,
-      topic: topic,
-      nbSeries: 4,
-      kilos: 50,
-    ));
+        uid: uidGen.v4(),
+        name: "Exercice $nb",
+        nbReps: topic != "idWorkoutCardio" ? 10 : 100,
+        topic: topic,
+        nbSeries: topic != "idWorkoutCardio" ? 4 : 15,
+        kilos: 1,
+        pounds: 1 * ratioKiloPounds));
     await _db.collection("users").doc(user.uid).set({
       'exercises': exercises.map((e) => e.toMap()).toList(),
     }, SetOptions(merge: true));
@@ -137,6 +138,7 @@ class DatabaseRepository {
       'uid': sessionUid,
       'userId': user.uid,
       'exercises': session.map((e) => e.toMap()).toList(),
+      'date': FieldValue.serverTimestamp()
     });
   }
 

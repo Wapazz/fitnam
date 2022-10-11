@@ -76,6 +76,7 @@ class WorkoutPage extends StatelessWidget {
                   Center(
                     child: IconButton(
                       onPressed: () => showCupertinoModalBottomSheet(
+                          barrierColor: Colors.black,
                           context: context,
                           builder: (context) => BlocProvider.value(
                                 value: cubit,

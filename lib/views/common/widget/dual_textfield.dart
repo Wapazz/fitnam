@@ -3,6 +3,7 @@ import 'package:fitnam/bloc/workout/workout_cubit.dart';
 import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DualTextField extends StatefulWidget {
   const DualTextField({Key? key, required this.exercise, required this.isBold})
@@ -30,7 +31,9 @@ class _DualTextFieldState extends State<DualTextField> {
         if (!value) {
           if (widget.isBold) {
             // Change workoutCubit Data if already in the list
-            context.read<WorkoutCubit>().clickExercise(widget.exercise);
+            context
+                .read<WorkoutCubit>()
+                .editExercise(widget.exercise.copyWith(name: _controller.text));
           }
           // Change CurrentUserCubit Data
           context
@@ -43,9 +46,35 @@ class _DualTextFieldState extends State<DualTextField> {
         style: TextStyle(
             color: Colors.white,
             fontWeight: widget.isBold ? FontWeight.bold : FontWeight.normal),
-        decoration: const InputDecoration(
-            border: InputBorder.none, focusedBorder: InputBorder.none),
+        decoration: InputDecoration(
+          fillColor: Colors.grey[800],
+          filled: true,
+          // icon: const Icon(FontAwesomeIcons.pencil, size: 15),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          enabledBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+              borderSide: BorderSide(width: 1, color: Colors.grey)),
+          focusedBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(width: 1, color: Theme.of(context).primaryColor)),
+        ),
       ),
+      // child: TextField(
+      //   controller: _controller,
+      //   style: TextStyle(
+      //       color: Colors.white,
+      //       fontWeight: widget.isBold ? FontWeight.bold : FontWeight.normal),
+      //   decoration: InputDecoration(
+      //     icon: const Icon(FontAwesomeIcons.pencil, size: 15),
+      //     enabledBorder: const UnderlineInputBorder(
+      //         borderRadius: BorderRadius.zero,
+      //         borderSide: BorderSide(width: 1, color: Colors.transparent)),
+      //     focusedBorder: UnderlineInputBorder(
+      //         borderSide:
+      //             BorderSide(width: 1, color: Theme.of(context).primaryColor)),
+      //   ),
+      // ),
     );
   }
 }

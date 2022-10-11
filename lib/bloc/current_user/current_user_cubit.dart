@@ -75,6 +75,11 @@ class CurrentUserCubit extends Cubit<CurrentUserState> {
     });
   }
 
+  Future<void> shadowSaveSession(
+      List<FitExercise> session, String sessionId) async {
+    await databaseRepository.saveSession(state.user, session, sessionId);
+  }
+
   Future<void> saveAvatar(String avatar) async {
     await Future.delayed(const Duration(milliseconds: 1000), () async {
       await databaseRepository.saveAvatar(state.user, avatar);

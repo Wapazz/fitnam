@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
     double notchSize = padding.top + padding.bottom;
     double headerSize = 160;
     double ctaHeight =
-        profile.selectedIndex == 0 || profile.selectedIndex == 8 ? 40 : 0;
+        profile.selectedIndex == 0 || profile.selectedIndex == 7 ? 50 : 30;
     double height =
         MediaQuery.of(context).size.height - notchSize - ctaHeight - headerSize;
 
@@ -31,7 +31,7 @@ class SettingsPage extends StatelessWidget {
         return SizedBox(
             height: height,
             child: SchedulePage(program: profile.profile.program));
-      case 8:
+      case 7:
         return SizedBox(
             height: height,
             child: UnitsPage(

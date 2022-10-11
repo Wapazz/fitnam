@@ -3,6 +3,7 @@ import 'package:fitnam/data/models/fit_exercise.dart';
 import 'package:fitnam/views/common/widget/dual_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ExerciseEditionCard extends StatelessWidget {
   const ExerciseEditionCard(
@@ -14,7 +15,7 @@ class ExerciseEditionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
       child: Row(
         children: [
           Switch(

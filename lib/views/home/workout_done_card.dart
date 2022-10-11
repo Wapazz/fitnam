@@ -45,7 +45,7 @@ class WorkoutCompletedCard extends StatelessWidget {
                           "Tu as réalisé ta séance de sport aujourd’hui. Tu peux maintenant te détendre.",
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
                       const Text(
-                          "Tu peux cliquer sur cette carte pour editer ta seance.",
+                          "Tu peux cliquer sur cette carte pour éditer ta séance.",
                           style: TextStyle(color: Colors.grey, fontSize: 12)),
                     ],
                   ),

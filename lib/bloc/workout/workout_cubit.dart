@@ -5,6 +5,7 @@ import 'package:fitnam/data/models/last_workout.dart';
 import 'package:fitnam/data/models/workout_topic.dart';
 import 'package:fitnam/data/repositories/database_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 part 'workout_state.dart';
 
@@ -20,10 +21,12 @@ class WorkoutCubit extends Cubit<WorkoutState> {
       exercises = await _db.getLastWorkoutExercises(lastWorkout.sessionUid);
       lastSessionUid = lastWorkout.sessionUid;
     } else {
+      Uuid uidGen = const Uuid();
       exercises = allExercises
           .where((element) =>
               state.program.map((e) => e.name).toList().contains(element.topic))
           .toList();
+      lastSessionUid = uidGen.v4();
     }
     emit(WorkoutStarted(state.program, exercises, state.selectedIndex,
         state.expandedExercise, lastSessionUid));

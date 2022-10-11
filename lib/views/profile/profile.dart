@@ -62,6 +62,7 @@ class ProfilePage extends StatelessWidget {
                               isEditable: true,
                               nbSession: user.nbWorkout,
                             ),
+                            const SizedBox(height: 28),
                             SettingsMenu(selectedIndex: state.selectedIndex),
                             SettingsPage(
                                 padding: notchSize,
@@ -72,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                       },
                     ),
                   ),
-                  if (state.selectedIndex == 0 || state.selectedIndex == 8)
+                  if (state.selectedIndex == 0 || state.selectedIndex == 7)
                     Positioned(
                       bottom: 0,
                       child: Container(

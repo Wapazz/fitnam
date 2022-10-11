@@ -14,9 +14,9 @@ class ExerciseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
-        color: Colors.grey[800],
+        // color: Colors.grey[800],
         child: Row(
           children: [
             Expanded(
@@ -75,6 +75,7 @@ class ExercisePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(height: 20),
           ...currentExercises
               .map((e) => Padding(
                   padding: const EdgeInsets.only(left: 10.0),
